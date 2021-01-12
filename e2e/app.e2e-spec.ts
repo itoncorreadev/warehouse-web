@@ -1,10 +1,10 @@
-import { TaskmanagerFrontendPage } from './app.po';
+import { WarehouseWeb } from './app.po';
 
-describe('taskmanager-frontend App', () => {
-  let page: TaskmanagerFrontendPage;
+describe('warehouse-web App', () => {
+  let page: WarehouseWebPage;
 
   beforeEach(() => {
-    page = new TaskmanagerFrontendPage();
+    page = new WarehouseWebPage();
   });
 
   it('should display message saying app works', () => {

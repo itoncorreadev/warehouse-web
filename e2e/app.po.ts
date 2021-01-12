@@ -1,6 +1,6 @@
 import { browser, by, element } from 'protractor';
 
-export class TaskmanagerFrontendPage {
+export class WarehouseWebPage {
   navigateTo() {
     return browser.get('/');
   }
