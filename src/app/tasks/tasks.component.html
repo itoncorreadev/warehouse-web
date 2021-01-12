@@ -9,9 +9,41 @@
       <td>{{ task.id }}</td>
       <td>{{ task.title }}</td>
       <td>
-        <button class="btn btn-info">Detalhes</button>
-        <button class="btn btn-danger">Excluir</button>
+        <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#TaskDetailModel" (click)="onSelect(task)">
+          Detalhes
+        </button>
+        <button class="btn btn-danger">
+          Excluir
+        </button>
       </td>
     </tr>
   </tbody>
 </table>
+
+<div *ngIf="selectedTask">
+  <p>
+    <strong>ID: </strong> {{ selectedTask.id }}
+  </p>
+  <p>
+    <strong>Título: </strong> {{ selectedTask.title }}
+  </p>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="TaskDetailModel" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true" *ngIf="selectedTask">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Detalhes da Tarefa: {{ selectedTask.title }}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <input [(ngModel)]="selectedTask.title" type="text" class="form-control">
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+        <button type="button" class="btn btn-primary">Salvar</button>
+      </div>
+    </div>
+  </div>
+</div>
