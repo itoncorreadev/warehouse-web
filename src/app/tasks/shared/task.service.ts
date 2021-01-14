@@ -25,4 +25,8 @@ export class TaskService{
     })
     return promise;
   }
+
+  public getImportantTasks(): Promise<Task[]>{
+    return Promise.resolve(TASKS.slice(0,3));
+  }
 }

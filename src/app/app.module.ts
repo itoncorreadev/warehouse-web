@@ -6,6 +6,7 @@ import { RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { NavbarComponent } from './navbar/navbar.component';
+import { TaskService } from "./tasks/shared/task.service";
 import { TaskDetailComponent } from "./tasks/task-detail/task-detail.component";
 import { TasksComponent } from './tasks/tasks.component';
 
@@ -40,7 +41,9 @@ const ROUTES = RouterModule.forRoot([
     RouterModule,
     ROUTES
   ],
-  providers: [],
+  providers: [
+    TaskService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
