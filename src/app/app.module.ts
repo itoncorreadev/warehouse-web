@@ -12,6 +12,10 @@ import { TasksComponent } from './tasks/tasks.component';
 
 const ROUTES = RouterModule.forRoot([
   {
+    path: 'tasks/:id',
+    component: TaskDetailComponent
+  },
+  {
     path: 'dashboard',
     component: DashboardComponent
   },
