@@ -10,9 +10,7 @@ import { TaskService } from "../tasks/shared/task.service";
 export class DashboardComponent implements OnInit{
   public tasks: Task[];
 
-  public constructor(private taskService: TaskService){
-
-  }
+  public constructor(private taskService: TaskService){}
 
   public ngOnInit(){
     this.taskService.getImportantTasks()
