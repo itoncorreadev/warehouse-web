@@ -39,4 +39,15 @@ export class TasksComponent implements OnInit{
         )
     }
   }
+
+  public deleteTask(task: Task){
+    if(confirm(`Deseja realmente excluir a tarefa "${task.title}"`)){
+      this.taskService.deleteTask(task.id)
+        .subscribe(
+          () => "Tarefa excluída com sucesso!",
+          () => "Ocorreu um erro no servidor, tente novamente mais tarde!",
+          () => this.tasks = this.tasks.filter(t => t !== task)
+        )
+    }
+  }
 }
