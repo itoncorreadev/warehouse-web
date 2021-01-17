@@ -1,9 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import "rxjs/add/observable/of";
-import "rxjs/add/operator/debounceTime";
-import "rxjs/add/operator/distinctUntilChanged";
-import "rxjs/add/operator/switchMap";
 import { Observable } from "rxjs/Observable";
 import { Subject } from "rxjs/Subject";
 import { Task } from "../../tasks/shared/task.model";
