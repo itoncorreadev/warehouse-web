@@ -5,6 +5,7 @@ import { ActivatedRoute, Params } from "@angular/router";
 import * as datetimepicker from 'eonasdan-bootstrap-datetimepicker';
 import * as $ from 'jquery';
 import "rxjs/add/operator/switchMap";
+import { FormUtils } from "../../shared/form.utils";
 import { Task } from '../shared/task.model';
 import { TaskService } from "../shared/task.service";
 
@@ -16,10 +17,11 @@ import { TaskService } from "../shared/task.service";
 })
 
 export class TaskDetailComponent implements OnInit, AfterViewInit{
-  public reactiveTaskForm: FormGroup;
+  public form: FormGroup;
   public datetime = datetimepicker;
   public task: Task;
   public taskDoneOptions: Array<any>;
+  public formUtils: FormUtils;
 
 
   public constructor(
@@ -33,12 +35,14 @@ export class TaskDetailComponent implements OnInit, AfterViewInit{
       { value: false, text: "Feita"}
     ];
 
-    this.reactiveTaskForm = this.formBuilder.group({
+    this.form = this.formBuilder.group({
       title: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(255)]],
       deadline: [null, Validators.required],
       done: [null, Validators.required],
       description: [null]
     })
+
+    this.formUtils = new FormUtils(this.form);
   }
 
 
@@ -57,7 +61,7 @@ export class TaskDetailComponent implements OnInit, AfterViewInit{
   public setTask(task: Task): void {
     this.task = task;
 
-    this.reactiveTaskForm.patchValue(task);
+    this.form.patchValue(task);
   }
 
 
@@ -65,7 +69,7 @@ export class TaskDetailComponent implements OnInit, AfterViewInit{
     $("#deadline").datetimepicker({
       sideBySide: true,
       locale: 'pt-br'
-    }).on('dp.change', () =>  this.reactiveTaskForm.get('deadline').setValue($("#deadline").val()));
+    }).on('dp.change', () =>  this.form.get('deadline').setValue($("#deadline").val()));
   }
 
 
@@ -75,10 +79,10 @@ export class TaskDetailComponent implements OnInit, AfterViewInit{
 
 
   public updateTask(){
-    this.task.title = this.reactiveTaskForm.get('title').value;
-    this.task.deadline = this.reactiveTaskForm.get('deadline').value;
-    this.task.done = this.reactiveTaskForm.get('done').value;
-    this.task.description = this.reactiveTaskForm.get('description').value;
+    this.task.title = this.form.get('title').value;
+    this.task.deadline = this.form.get('deadline').value;
+    this.task.done = this.form.get('done').value;
+    this.task.description = this.form.get('description').value;
 
     this.taskService.update(this.task)
     .subscribe(
@@ -86,32 +90,5 @@ export class TaskDetailComponent implements OnInit, AfterViewInit{
       () => alert("Ocorreu um erro no servidor, tente mais tarde!"),
       () => this.goBack()
     )
-  }
-
-
-  public fieldClassForErrorOrSuccess(fieldName: string){
-    return {
-      "has-error": this.showFieldError(fieldName),
-      "has-success": this.getField(fieldName).valid
-    }
-  }
-
-
-  public iconClassForErrorOrSuccess(fieldName: string){
-    return {
-      "glyphicon-remove": this.showFieldError(fieldName),
-      "glyphicon-ok": this.getField(fieldName).valid
-    }
-  }
-
-
-  public showFieldError(fieldName: string): boolean{
-    let field = this.getField(fieldName);
-    return field.invalid && ( field.touched || field.dirty )
-  }
-
-
-  public getField(fieldName: string){
-    return this.reactiveTaskForm.get(fieldName);
   }
 }
