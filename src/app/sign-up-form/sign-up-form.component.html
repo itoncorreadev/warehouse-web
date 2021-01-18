@@ -50,6 +50,7 @@
 
         <div *ngIf="formUtils.showFieldError('passwordConfirmation')" class="text-danger">
           <div *ngIf="form.get('passwordConfirmation').errors.required">A confirmação de senha é obrigatória</div>
+          <div *ngIf="form.get('passwordConfirmation').errors.mismatch">A confirmação de senha inválida</div>
         </div>
       </div>
     </div>
