@@ -21,7 +21,6 @@ import { TaskDetailComponent } from "./tasks/task-detail/task-detail.component";
 import { TasksComponent } from './tasks/tasks.component';
 
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,4 +42,6 @@ import { TasksComponent } from './tasks/tasks.component';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule{
+
+}

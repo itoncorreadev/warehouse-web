@@ -1,6 +1,8 @@
 import { Location } from "@angular/common";
-import { Component, OnInit } from "@angular/core";
+import { AfterViewInit, Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Params } from "@angular/router";
+import * as datetimepicker from 'eonasdan-bootstrap-datetimepicker';
+//import * as $ from 'jquery';
 import "rxjs/add/operator/switchMap";
 import { Task } from '../shared/task.model';
 import { TaskService } from "../shared/task.service";
@@ -11,7 +13,8 @@ import { TaskService } from "../shared/task.service";
   templateUrl: './task-detail.component.html'
 })
 
-export class TaskDetailComponent implements OnInit{
+export class TaskDetailComponent implements OnInit, AfterViewInit{
+  public datetime = datetimepicker;
   public task: Task;
   public taskDoneOptions: Array<any> = [
     { value: false, text: "Pendente"},
@@ -25,6 +28,8 @@ export class TaskDetailComponent implements OnInit{
   ){ }
 
   public ngOnInit(){
+    this.task = new Task(null, null);
+
     this.route.params
       .switchMap((params: Params) => this.taskService.getById(+params['id']))
       .subscribe(
@@ -33,21 +38,25 @@ export class TaskDetailComponent implements OnInit{
       )
   }
 
+  public ngAfterViewInit(){
+
+    $("#deadline").datetimepicker({
+      sideBySide: true,
+      locale: 'pt-br'
+    }).on('dp.change', () =>  this.task.deadline = $("#deadline").val());
+  }
+
   public goBack(){
     this.location.back();
   }
 
   public updateTask(){
-    if(!this.task.title){
-      alert("A tarefa dever ter um título!")
-    } else {
-      this.taskService.update(this.task)
-        .subscribe(
-          () => alert("Tarefa atualizada com sucesso!"),
-          () => alert("Ocorreu um erro no servidor, tente mais tarde!"),
-          () => this.goBack()
-        )
-    }
+    this.taskService.update(this.task)
+    .subscribe(
+      () => alert("Tarefa atualizada com sucesso!"),
+      () => alert("Ocorreu um erro no servidor, tente mais tarde!"),
+      () => this.goBack()
+    )
   }
 
   public showFieldError(field): boolean{
