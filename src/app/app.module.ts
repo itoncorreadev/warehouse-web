@@ -17,6 +17,7 @@ import { DashboardComponent } from "./dashboard/dashboard.component";
 import { InMemoryTaskDataService } from "./in-memory-task-data.service";
 import { NavbarComponent } from './navbar/navbar.component';
 import { TaskSearchComponent } from "./navbar/task-search/task-search.component";
+import { AuthService } from "./shared/auth.service";
 import { SignInFormComponent } from "./sign-in-form/sign-in-form.component";
 import { SignUpFormComponent } from "./sign-up-form/sign-up-form.component";
 import { TaskService } from "./tasks/shared/task.service";
@@ -44,6 +45,7 @@ import { TasksComponent } from './tasks/tasks.component';
   ],
   providers: [
     Angular2TokenService,
+    AuthService,
     TaskService
   ],
   bootstrap: [AppComponent]
