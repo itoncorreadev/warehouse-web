@@ -2,8 +2,8 @@ import { Location } from "@angular/common";
 import { AfterViewInit, Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup } from "@angular/forms";
 import { ActivatedRoute, Params } from "@angular/router";
-//import * as datetimepicker from 'eonasdan-bootstrap-datetimepicker';
-//import * as $ from 'jquery';
+import * as datetimepicker from 'eonasdan-bootstrap-datetimepicker';
+import * as $ from 'jquery';
 import "rxjs/add/operator/switchMap";
 import { Task } from '../shared/task.model';
 import { TaskService } from "../shared/task.service";
@@ -16,7 +16,7 @@ import { TaskService } from "../shared/task.service";
 
 export class TaskDetailComponent implements OnInit, AfterViewInit{
   public reactiveTaskForm: FormGroup;
-  //public datetime = datetimepicker;
+  public datetime = datetimepicker;
   public task: Task;
   public taskDoneOptions: Array<any> = [
     { value: false, text: "Pendente"},
@@ -42,17 +42,22 @@ export class TaskDetailComponent implements OnInit, AfterViewInit{
     this.route.params
       .switchMap((params: Params) => this.taskService.getById(+params['id']))
       .subscribe(
-        task => this.task = task,
+        task => this.setTask(task),
         error => alert("Ocorreu um error no servidor, tente mais tarde.")
       )
   }
 
-  public ngAfterViewInit(){
+  public setTask(task: Task): void {
+    this.task = task;
 
-    // $("#deadline").datetimepicker({
-    //   sideBySide: true,
-    //   locale: 'pt-br'
-    // }).on('dp.change', () =>  this.task.deadline = $("#deadline").val());
+    this.reactiveTaskForm.patchValue(task);
+  }
+
+  public ngAfterViewInit(){
+    $("#deadline").datetimepicker({
+      sideBySide: true,
+      locale: 'pt-br'
+    }).on('dp.change', () =>  this.reactiveTaskForm.get('deadline').setValue($("#deadline").val()));
   }
 
   public goBack(){
