@@ -1,6 +1,6 @@
 import { Location } from "@angular/common";
 import { AfterViewInit, Component, OnInit } from "@angular/core";
-import { FormBuilder, FormGroup } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, Params } from "@angular/router";
 import * as datetimepicker from 'eonasdan-bootstrap-datetimepicker';
 import * as $ from 'jquery';
@@ -30,9 +30,9 @@ export class TaskDetailComponent implements OnInit, AfterViewInit{
     private formBuilder: FormBuilder
   ){
     this.reactiveTaskForm = this.formBuilder.group({
-      title: [null],
-      deadline: [null],
-      done: [null],
+      title: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(255)]],
+      deadline: [null, Validators.required],
+      done: [null, Validators.required],
       description: [null]
     })
   }
