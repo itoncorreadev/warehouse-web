@@ -3,6 +3,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
 import { InMemoryWebApiModule } from "angular-in-memory-web-api";
+import { Angular2TokenService } from "angular2-token";
 import "rxjs/add/Observable/of";
 import "rxjs/add/Observable/throw";
 import "rxjs/add/operator/catch";
@@ -21,7 +22,6 @@ import { SignUpFormComponent } from "./sign-up-form/sign-up-form.component";
 import { TaskService } from "./tasks/shared/task.service";
 import { TaskDetailComponent } from "./tasks/task-detail/task-detail.component";
 import { TasksComponent } from './tasks/tasks.component';
-
 
 @NgModule({
   declarations: [
@@ -43,6 +43,7 @@ import { TasksComponent } from './tasks/tasks.component';
     InMemoryWebApiModule.forRoot(InMemoryTaskDataService)
   ],
   providers: [
+    Angular2TokenService,
     TaskService
   ],
   bootstrap: [AppComponent]
