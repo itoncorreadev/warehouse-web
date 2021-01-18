@@ -22,7 +22,7 @@
       <input type="text" formControlName="deadline" id="deadline" class="form-control">
       <span class="glyphicon form-control-feedback" [ngClass]="iconClassForErrorOrSuccess('deadline')"></span>
 
-      <div *ngIf="getField('deadline')" class="text-danger">O prazo é obrigatório</div>
+      <div *ngIf="showFieldError('deadline')" class="text-danger">O prazo é obrigatório</div>
     </div>
 
     <!-- taskDone -->
@@ -33,7 +33,7 @@
       </select>
       <span class="glyphicon form-control-feedback" [ngClass]="iconClassForErrorOrSuccess('done')"></span>
 
-      <div *ngIf="getField('done')" class="text-danger">A situação é obrigatório</div>
+      <div *ngIf="showFieldError('done')" class="text-danger">A situação é obrigatório</div>
     </div>
   </div>
 
