@@ -11,8 +11,9 @@ export class AuthService{
 
   }
 
-  public signUp(user: User){
-    //
+  public signUp(user: User): Observable<Response>{
+    return this.tokenService.registerAccount(user as any)
+      .catch(this.handleErrors)
   }
 
   public signIn(uid: string, password: string){
