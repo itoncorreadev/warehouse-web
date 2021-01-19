@@ -12,7 +12,13 @@ export class AppComponent {
 
   public constructor(private tokenService: Angular2TokenService){
     this.tokenService.init({
-      apiBase: 'http://api.warehouse.test:3000'
+      apiBase: 'http://api.warehouse.test:3000',
+      globalOptions: {
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/vnd.warehouse.v2'
+        }
+      }
     })
   }
 }
