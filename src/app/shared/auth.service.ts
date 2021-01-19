@@ -23,7 +23,7 @@ export class AuthService{
     //
   }
 
-  public isSignedIn(){
+  public userSignedIn(){
     //
   }
 
