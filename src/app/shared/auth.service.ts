@@ -24,7 +24,7 @@ export class AuthService{
   }
 
   public userSignedIn(){
-    //
+    return this.tokenService.userSignedIn();
   }
 
   private handleErrors(error: Response){
