@@ -16,7 +16,7 @@ export class SignUpFormComponent{
   public submitted: boolean;
   public formErrors: Array<string>;
 
-  public constructor(private authService: AuthService, private FormBuilder: FormBuilder, private router: Router){
+  public constructor(private authService: AuthService, private formBuilder: FormBuilder, private router: Router){
     this.setupForm();
     this.formUtils = new FormUtils(this.form);
     this.submitted = false;
@@ -54,7 +54,7 @@ export class SignUpFormComponent{
 
 
   private setupForm(){
-    this.form = this.FormBuilder.group({
+    this.form = this.formBuilder.group({
       name: [null, [Validators.required, Validators.minLength(5), Validators.maxLength(100)]],
       email: [null, [Validators.required, Validators.email]],
       password: [null, [Validators.required, Validators.minLength(8)]],

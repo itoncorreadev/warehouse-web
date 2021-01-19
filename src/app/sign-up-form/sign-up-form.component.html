@@ -11,6 +11,8 @@
       <li *ngFor="let error of formErrors">{{ error }}</li>
     </ul>
   </div>
+
+
   <form class="form-horizontal" [formGroup]="form" (ngSubmit)="signUpUser()">
     <div class="form-group has-feedback" [ngClass]="formUtils.fieldClassForErrorOrSuccess('name')">
       <label for="name" class="col-sm-4 control-label">Nome</label>
