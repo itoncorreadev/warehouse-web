@@ -14,7 +14,8 @@ import "rxjs/add/operator/switchMap";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from './app.component';
 import { DashboardComponent } from "./dashboard/dashboard.component";
-import { AuthGuard } from "./guards/auth.guards";
+import { AuthGuard } from "./guards/auth.guard";
+import { NotAuthenticatedGuard } from "./guards/not-authenticated.guard";
 //import { InMemoryTaskDataService } from "./in-memory-task-data.service";
 import { NavbarComponent } from './navbar/navbar.component';
 import { TaskSearchComponent } from "./navbar/task-search/task-search.component";
@@ -48,6 +49,7 @@ import { TasksComponent } from './tasks/tasks.component';
     Angular2TokenService,
     AuthGuard,
     AuthService,
+    NotAuthenticatedGuard,
     TaskService
   ],
   bootstrap: [AppComponent]
