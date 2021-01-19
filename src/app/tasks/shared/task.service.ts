@@ -1,50 +1,53 @@
 import { Injectable } from "@angular/core";
-import { Headers, Http, Response } from "@angular/http";
+import { Response } from "@angular/http";
+import { Angular2TokenService } from "angular2-token";
 import { Observable } from "rxjs/Observable";
 import { Task } from "./task.model";
-
 
 @Injectable()
 
 export class TaskService{
-  public taskUrl = "http://api.warehouse.test:3000/tasks";
-  public headers = new Headers({'Content-type': 'application/json'});
+  public taskUrl = "tasks";
 
-  public constructor(private http: Http){}
+  public constructor(private tokenHttp: Angular2TokenService){}
 
   public getAll(): Observable<Task[]>{
-    return this.http.get(this.taskUrl)
+    let url = `${this.taskUrl}?q[s]=updated_at+DESC`;
+
+    return this.tokenHttp.get(url)
       .catch(this.handleErrors)
-      .map((response: Response) => response.json().data as Task[])
+      .map((response: Response) => this.responseToTasks(response));
   }
 
   public getImportant(): Observable<Task[]>{
-    return this.getAll()
+    let url = `${this.taskUrl}?q[s]=deadline+ASC`;
+
+    return this.tokenHttp.get(url)
       .catch(this.handleErrors)
-      .map(tasks => tasks.slice(0,3));
+      .map((response: Response) => this.responseToTasks(response));
   }
 
   public getById(id: number): Observable<Task>{
     let url = `${this.taskUrl}/${id}`;
-    return this.http.get(url)
+    return this.tokenHttp.get(url)
       .catch(this.handleErrors)
-      .map((response: Response) => response.json().data as Task);
+      .map((response: Response) => this.responseToTask(response));
   }
 
   public create(task: Task): Observable<Task>{
     let url = this.taskUrl;
     let body = JSON.stringify(task);
 
-    return this.http.post(url, body, { headers: this.headers})
+    return this.tokenHttp.post(url, body)
       .catch(this.handleErrors)
-      .map(response => response.json().data as Task)
+      .map((response: Response) => this.responseToTask(response));
   }
 
   public update(task: Task): Observable<Task>{
     let url = `${this.taskUrl}/${task.id}`;
     let body = JSON.stringify(task);
 
-    return this.http.put(url, body, { headers: this.headers })
+    return this.tokenHttp.put(url, body)
       .catch(this.handleErrors)
       .map(() => task)
   }
@@ -52,21 +55,51 @@ export class TaskService{
   public delete(id: number): Observable<null>{
     let url = `${this.taskUrl}/${id}`;
 
-    return this.http.delete(url, {headers: this.headers })
+    return this.tokenHttp.delete(url)
       .catch(this.handleErrors)
       .map(() => null)
   }
 
   public searchByTitle(term: string): Observable<Task[]>{
-    let url = `${this.taskUrl}?title=${term}`;
+    let url = `${this.taskUrl}?q[title_cont]=${term}`;
 
-    return this.http.get(url)
+    return this.tokenHttp.get(url)
       .catch(this.handleErrors)
-      .map((response: Response) => response.json().data as Task[])
+      .map((response: Response) => this.responseToTasks(response));
   }
 
   private handleErrors(error: Response){
     console.log("SALVANDO O ERRO NUM ARQUIVO DE LOG - DETALHES DO ERRO =>", error);
     return Observable.throw(error);
+  }
+
+
+  private responseToTasks(response: Response): Task[]{
+    let collection = response.json().data as Array<any>;
+    let tasks: Task[] = [];
+
+    collection.forEach(item => {
+      let task = new Task(
+        item.id,
+        item.attributes.title,
+        item.attributes.description,
+        item.attributes.done,
+        item.attributes['deadline-to-br']
+      )
+
+      tasks.push(task)
+    })
+
+    return tasks;
+  }
+
+  private responseToTask(response: Response): Task {
+    return new Task(
+      response.json().data.id,
+      response.json().data.attributes.title,
+      response.json().data.attributes.description,
+      response.json().data.attributes.done,
+      response.json().data.attributes['deadline-to-br']
+    )
   }
 }

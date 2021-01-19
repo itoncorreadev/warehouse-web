@@ -60,7 +60,6 @@ export class TaskDetailComponent implements OnInit, AfterViewInit{
 
   public setTask(task: Task): void {
     this.task = task;
-
     this.form.patchValue(task);
   }
 
