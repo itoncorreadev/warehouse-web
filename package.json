@@ -34,6 +34,7 @@
     "zone.js": "~0.8.4"
   },
   "devDependencies": {
+    "@angular-devkit/build-angular": "~0.8.0",
     "@angular/compiler-cli": "^5.2.11",
     "@types/eonasdan-bootstrap-datetimepicker": "^4.17.23",
     "@types/jasmine": "2.5.38",
