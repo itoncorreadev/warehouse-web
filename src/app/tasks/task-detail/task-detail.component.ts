@@ -3,7 +3,6 @@ import { AfterViewInit, Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, ParamMap } from "@angular/router";
 import * as datetimepicker from 'eonasdan-bootstrap-datetimepicker';
-import * as $ from 'jquery';
 import { switchMap } from "rxjs/operators";
 import { FormUtils } from "../../shared/form.utils";
 import { Task } from '../shared/task.model';
@@ -50,7 +49,7 @@ export class TaskDetailComponent implements OnInit, AfterViewInit{
     this.task = new Task(null, null);
 
     this.route.paramMap.pipe(
-      switchMap((params: ParamMap) => this.taskService.getById(+params['id']))
+      switchMap((params: ParamMap) => this.taskService.getById(+params.get('id')))
     )
     .subscribe(
       task => this.setTask(task),
@@ -66,10 +65,10 @@ export class TaskDetailComponent implements OnInit, AfterViewInit{
 
 
   public ngAfterViewInit(){
-    $("#deadline").datetimepicker({
-      sideBySide: true,
-      locale: 'pt-br'
-    }).on('dp.change', () =>  this.form.get('deadline').setValue($("#deadline").val()));
+     $("#deadline").datetimepicker({
+       sideBySide: true,
+       locale: 'pt-br'
+     }).on('dp.change', () =>  this.form.get('deadline').setValue($("#deadline").val()));
   }
 
 
