@@ -12,7 +12,7 @@
     </div>
 
     <!-- Collect the nav links, forms, and other content for toggling -->
-    <div *ngIf="authService.userSignedIn()" class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+    <div *ngIf="userSignedIn()" class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li routerLinkActive="active">
           <a routerLink="/dashboard">Dashboard</a>
@@ -21,10 +21,10 @@
           <a routerLink="/tasks">Tarefas</a>
         </li>
         <li routerLinkActive="active">
-          <a routerLink="/provider">Fornecedores</a>
+          <a routerLink="/providers">Fornecedores</a>
         </li>
         <li routerLinkActive="active">
-          <a routerLink="/product">Produtos</a>
+          <a routerLink="/products">Produtos</a>
         </li>
       </ul>
 

@@ -17,6 +17,7 @@ import { NotAuthenticatedGuard } from "./guards/not-authenticated.guard";
 //import { InMemoryTaskDataService } from "./in-memory-task-data.service";
 import { NavbarComponent } from './navbar/navbar.component';
 import { TaskSearchComponent } from "./navbar/task-search/task-search.component";
+import { ProvidersComponent } from "./providers/providers.component";
 import { AuthService } from "./shared/auth.service";
 //import { InMemoryWebApiModule } from "angular-in-memory-web-api";
 import { TokenService } from "./shared/token.service";
@@ -26,11 +27,13 @@ import { TaskService } from "./tasks/shared/task.service";
 import { TaskDetailComponent } from "./tasks/task-detail/task-detail.component";
 import { TasksComponent } from './tasks/tasks.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
     DashboardComponent,
     NavbarComponent,
+    ProvidersComponent,
     SignInFormComponent,
     SignUpFormComponent,
     TaskSearchComponent,

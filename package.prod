@@ -4,37 +4,36 @@
   "license": "MIT",
   "scripts": {
     "ng": "ng",
-    "start": "ng server.js",
+    "start": "ng serve",
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e",
-    "postinstall": "ng build --prodng "
+    "e2e": "ng e2e"
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^5.2.11",
-    "@angular/cli": "^6.2.9",
-    "@angular/common": "^5.2.11",
-    "@angular/compiler": "^5.2.11",
-    "@angular/core": "^5.2.11",
-    "@angular/forms": "^5.2.11",
-    "@angular/http": "^5.2.11",
-    "@angular/platform-browser": "^5.2.11",
-    "@angular/platform-browser-dynamic": "^5.2.11",
-    "@angular/platform-server": "^5.2.11",
-    "@angular/router": "^5.2.11",
+    "@angular/common": "~4.0.0",
+    "@angular/compiler": "~4.0.0",
+    "@angular/core": "~4.0.0",
+    "@angular/forms": "~4.0.0",
+    "@angular/http": "~4.0.0",
+    "@angular/platform-browser": "~4.0.0",
+    "@angular/platform-browser-dynamic": "~4.0.0",
+    "@angular/router": "~4.0.0",
+    "angular-in-memory-web-api": "^0.3.2",
     "angular2-token": "^0.2.0-beta.12",
     "bootstrap": "^3.3.7",
     "core-js": "~2.4.1",
     "eonasdan-bootstrap-datetimepicker": "^4.17.47",
     "jquery": "^3.2.1",
     "moment": "^2.18.1",
-    "rxjs": "^5.5.12",
-    "zone.js": "~0.8.4"
+    "rxjs": "~5.1.0",
+    "zone.js": "~0.8.4",
+    "enhanced-resolve": "3.3.0"
   },
   "devDependencies": {
-    "@angular/compiler-cli": "^5.2.11",
+    "@angular/cli": "1.0.3",
+    "@angular/compiler-cli": "~4.0.0",
     "@types/eonasdan-bootstrap-datetimepicker": "^4.17.23",
     "@types/jasmine": "2.5.38",
     "@types/jquery": "^2.0.48",
@@ -51,10 +50,6 @@
     "protractor": "~5.1.0",
     "ts-node": "~2.0.0",
     "tslint": "~4.5.0",
-    "typescript": "2.4.2"
-  },
-  "engines": {
-    "node": "14.15.4",
-    "npm": "6.14.10"
+    "typescript": "~2.2.0"
   }
 }
