@@ -12,7 +12,7 @@ export class AppComponent {
 
   public constructor(private tokenService: TokenService){
     this.tokenService.init({
-      apiBase: 'http://api.warehouse.test:3000',
+      apiBase: 'https://warehouse-rails-api.herokuapp.com/',
       globalOptions: {
         headers: {
           'Content-Type': 'application/json',
