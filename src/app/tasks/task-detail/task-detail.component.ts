@@ -1,13 +1,14 @@
 import { Location } from "@angular/common";
 import { AfterViewInit, Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { ActivatedRoute, Params } from "@angular/router";
+import { ActivatedRoute, ParamMap } from "@angular/router";
 import * as datetimepicker from 'eonasdan-bootstrap-datetimepicker';
 import * as $ from 'jquery';
-import "rxjs/add/operator/switchMap";
+import { switchMap } from "rxjs/operators";
 import { FormUtils } from "../../shared/form.utils";
 import { Task } from '../shared/task.model';
 import { TaskService } from "../shared/task.service";
+window['datetimepicker'] = window['datetimepicker'] = datetimepicker;
 
 
 @Component({
@@ -18,7 +19,6 @@ import { TaskService } from "../shared/task.service";
 
 export class TaskDetailComponent implements OnInit, AfterViewInit{
   public form: FormGroup;
-  public datetime = datetimepicker;
   public task: Task;
   public taskDoneOptions: Array<any>;
   public formUtils: FormUtils;
@@ -49,12 +49,13 @@ export class TaskDetailComponent implements OnInit, AfterViewInit{
   public ngOnInit(){
     this.task = new Task(null, null);
 
-    this.route.params
-      .switchMap((params: Params) => this.taskService.getById(+params['id']))
-      .subscribe(
-        task => this.setTask(task),
-        error => alert("Ocorreu um error no servidor, tente mais tarde.")
-      )
+    this.route.paramMap.pipe(
+      switchMap((params: ParamMap) => this.taskService.getById(+params['id']))
+    )
+    .subscribe(
+      task => this.setTask(task),
+      error => alert("Ocorreu um error no servidor, tente mais tarde.")
+    )
   }
 
 
