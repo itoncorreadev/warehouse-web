@@ -1,0 +1,9 @@
+<div style="position: relative;">
+  <div class="form-group">
+    <input #searchInput type="text" (keyup)="search(searchInput.value)" class="form-control" placeholder="Pesquisa">
+  </div>
+
+  <div *ngIf="products" class="list-group" style="position: absolute; width: 100%; left: 0; top: 35px; z-index: 1000;">
+    <a *ngFor="let product of products" (click)="gotoProduct(products)" class="list-group-item" style="cursor: pointer;">{{ product.name }}</a>
+  </div>
+</div>
