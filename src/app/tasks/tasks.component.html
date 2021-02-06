@@ -1,4 +1,4 @@
-<h1 class="page-header">Lista de Tarefas</h1>
+<h4 class="page-header">Lista de Tarefas</h4>
 
 <div class="well">
   <form (ngSubmit)="createTask()">
@@ -8,6 +8,7 @@
       </div>
       <div class="col-md-2">
         <button class="btn btn-success" type="submit">
+          <span class="glyphicon glyphicon-plus"></span>
           Adicionar Tarefa
         </button>
       </div>
@@ -28,10 +29,10 @@
       <td>{{ task.id }}</td>
       <td>{{ task.title }}</td>
       <td>
-        <a [routerLink]="['/tasks',task.id]" class="btn btn-info">
+        <a [routerLink]="['/tasks',task.id]" class="btn btn-primary">
           <span class="glyphicon glyphicon-info-sign"></span>
           Detalhes
-        </a>
+        </a>&nbsp;
         <button class="btn btn-danger" (click)="deleteTask(task)">
           <span class="glyphicon glyphicon-trash"></span>
           Excluir

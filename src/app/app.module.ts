@@ -9,8 +9,9 @@ import { AuthGuard } from "./guards/auth.guard";
 import { NotAuthenticatedGuard } from "./guards/not-authenticated.guard";
 //import { InMemoryTaskDataService } from "./in-memory-task-data.service";
 import { NavbarComponent } from './navbar/navbar.component';
-import { TaskSearchComponent } from "./navbar/task-search/task-search.component";
 import { ProductSearchComponent } from "./navbar/product-search/product-search.component";
+import { TaskSearchComponent } from "./navbar/task-search/task-search.component";
+import { ProductDetailComponent } from "./products/product-detail/product-detail.component";
 import { ProductsComponent } from "./products/products.component";
 import { ProductService } from "./products/shared/product.service";
 import { AuthService } from "./shared/auth.service";
@@ -34,7 +35,8 @@ import { TasksComponent } from './tasks/tasks.component';
     TaskSearchComponent,
     TasksComponent,
     TaskDetailComponent,
-    ProductSearchComponent
+    ProductSearchComponent,
+    ProductDetailComponent
   ],
   imports: [
     BrowserModule,

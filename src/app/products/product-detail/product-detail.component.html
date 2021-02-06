@@ -1,0 +1,114 @@
+<h4 class="page-header">Produto: {{ product.name }}</h4>
+
+<form [formGroup]="form" (ngSubmit)="updateProduct()">
+  <div class="row">
+
+    <!-- productName -->
+    <div class="form-group col-md-6 has-feedback" [ngClass]="formUtils.fieldClassForErrorOrSuccess('name')">
+      <label for="name" class="control-label">Nome</label>
+      <input type="text" formControlName="name" id="name" class="form-control">
+      <span class="glyphicon form-control-feedback" [ngClass]="formUtils.iconClassForErrorOrSuccess('name')"></span>
+
+      <div *ngIf="formUtils.showFieldError('name')" class="text-danger">
+        <div *ngIf="form.get('name').errors.required">O nome é obrigatório!</div>
+        <div *ngIf="form.get('name').errors.minlength">O nome deve ter no mínimo 2 caracteres!</div>
+        <div *ngIf="form.get('name').errors.maxlength">O nome deve ter no máximo 255 caracteres!</div>
+      </div>
+    </div>
+
+    <!-- productCode -->
+    <div class="form-group col-md-3 has-feedback" [ngClass]="formUtils.fieldClassForErrorOrSuccess('code')">
+      <label for="code" class="control-label">Código</label>
+      <input type="text" formControlName="code" id="code" class="form-control">
+      <span class="glyphicon form-control-feedback" [ngClass]="formUtils.iconClassForErrorOrSuccess('code')"></span>
+
+      <div *ngIf="formUtils.showFieldError('code')" class="text-danger">O prazo é obrigatório</div>
+    </div>
+
+    <!-- productCategory -->
+    <div class="form-group col-md-3 has-feedback" [ngClass]="formUtils.fieldClassForErrorOrSuccess('category')">
+      <label for="category" class="control-label">Categoria</label>
+      <input type="text" formControlName="category" id="category" class="form-control">
+      <span class="glyphicon form-control-feedback" [ngClass]="formUtils.iconClassForErrorOrSuccess('category')"></span>
+
+      <div *ngIf="formUtils.showFieldError('code')" class="text-danger">O código é obrigatório</div>
+    </div>
+
+    <!-- productProductType -->
+    <div class="form-group col-md-3 has-feedback" [ngClass]="formUtils.fieldClassForErrorOrSuccess('product_type')">
+      <label for="product_type" class="control-label">Tipo</label>
+      <select id="product_type" class="form-control" formControlName="product_type">
+        <option *ngFor="let option of productTypeOptions" [value]="option.value">{{ option.text }}</option>
+      </select>
+      <span class="glyphicon form-control-feedback" [ngClass]="formUtils.iconClassForErrorOrSuccess('product_type')"></span>
+
+      <div *ngIf="formUtils.showFieldError('product_type')" class="text-danger">O tipo é obrigatório</div>
+    </div>
+
+    <!-- productMeasure -->
+    <div class="form-group col-md-3 has-feedback" [ngClass]="formUtils.fieldClassForErrorOrSuccess('measure')">
+      <label for="measure" class="control-label">Medida</label>
+      <select id="measure" class="form-control" formControlName="measure">
+        <option *ngFor="let option of productMeasureOptions" [value]="option.value">{{ option.text }}</option>
+      </select>
+      <span class="glyphicon form-control-feedback" [ngClass]="formUtils.iconClassForErrorOrSuccess('measure')"></span>
+
+      <div *ngIf="formUtils.showFieldError('measure')" class="text-danger">A medida é obrigatório</div>
+    </div>
+
+    <!-- productMin -->
+    <div class="form-group col-md-3 has-feedback" [ngClass]="formUtils.fieldClassForErrorOrSuccess('min')">
+      <label for="min" class="control-label">Minímo</label>
+      <input type="text" formControlName="min" id="min" class="form-control">
+      <span class="glyphicon form-control-feedback" [ngClass]="formUtils.iconClassForErrorOrSuccess('min')"></span>
+
+      <div *ngIf="formUtils.showFieldError('min')" class="text-danger">Quantidade mínima é obrigatório</div>
+    </div>
+
+    <!-- productMed -->
+    <div class="form-group col-md-3 has-feedback" [ngClass]="formUtils.fieldClassForErrorOrSuccess('med')">
+      <label for="med" class="control-label">Médio</label>
+      <input type="text" formControlName="med" id="med" class="form-control">
+      <span class="glyphicon form-control-feedback" [ngClass]="formUtils.iconClassForErrorOrSuccess('med')"></span>
+
+      <div *ngIf="formUtils.showFieldError('med')" class="text-danger">Quantidade média é obrigatório</div>
+    </div>
+
+    <!-- productMax -->
+    <div class="form-group col-md-3 has-feedback" [ngClass]="formUtils.fieldClassForErrorOrSuccess('max')">
+      <label for="max" class="control-label">Maxímo</label>
+      <input type="text" formControlName="max" id="max" class="form-control">
+      <span class="glyphicon form-control-feedback" [ngClass]="formUtils.iconClassForErrorOrSuccess('max')"></span>
+
+      <div *ngIf="formUtils.showFieldError('max')" class="text-danger">Quantidade máxima é obrigatório</div>
+    </div>
+
+    <!-- productLocation -->
+    <div class="form-group col-md-3 has-feedback" [ngClass]="formUtils.fieldClassForErrorOrSuccess('location')">
+      <label for="location" class="control-label">Localização</label>
+      <input type="text" formControlName="location" id="location" class="form-control">
+      <span class="glyphicon form-control-feedback" [ngClass]="formUtils.iconClassForErrorOrSuccess('location')"></span>
+
+      <div *ngIf="formUtils.showFieldError('location')" class="text-danger">Localização é obrigatório</div>
+    </div>
+
+    <!-- productMeasure -->
+    <div class="form-group col-md-3 has-feedback" [ngClass]="formUtils.fieldClassForErrorOrSuccess('status')">
+      <label for="status" class="control-label">Status</label>
+      <select id="status" class="form-control" formControlName="status">
+        <option *ngFor="let option of productStatusOptions" [value]="option.value">{{ option.text }}</option>
+      </select>
+      <span class="glyphicon form-control-feedback" [ngClass]="formUtils.iconClassForErrorOrSuccess('status')"></span>
+
+      <div *ngIf="formUtils.showFieldError('status')" class="text-danger">A medida é obrigatório</div>
+    </div>
+
+    <!-- taskDescription -->
+    <div class="form-group col-md-12">
+      <label for="description" class="control-label">Descrição</label>
+      <textarea formControlName="description" id="description" class="form-control" rows="4"></textarea>
+    </div>
+  </div>
+  <button [disabled]="form.invalid" type="submit" class="btn btn-success">Salvar</button>&nbsp;
+  <button type="button" class="btn btn-default" (click)="goBack()">Voltar</button>
+</form>

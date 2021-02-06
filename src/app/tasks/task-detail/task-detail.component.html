@@ -1,4 +1,4 @@
-<h1 class="page-header">Detalhes da Tarefa: {{ task.title }}</h1>
+<h4 class="page-header">Tarefa: {{ task.title }}</h4>
 
 <form [formGroup]="form" (ngSubmit)="updateTask()">
   <div class="row">
@@ -45,6 +45,6 @@
     </div>
   </div>
 
-  <button [disabled]="form.invalid" type="submit" class="btn btn-success">Salvar</button>
+  <button [disabled]="form.invalid" type="submit" class="btn btn-success">Salvar</button>&nbsp;
   <button type="button" class="btn btn-default" (click)="goBack()">Voltar</button>
 </form>

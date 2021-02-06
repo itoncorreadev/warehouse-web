@@ -15,27 +15,30 @@
     <div *ngIf="userSignedIn()" class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li routerLinkActive="active">
-          <a routerLink="/dashboard"><span class="glyphicon glyphicon-th-large text-info"></span> Dashboard</a>
+          <a routerLink="/dashboard"><span class="glyphicon glyphicon-th-large text-primary"></span> Dashboard</a>
         </li>
         <li class="dropdown">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-list text-warning"></span> Cadastros <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li routerLinkActive="active">
-              <a routerLink="/groups"><span class="glyphicon glyphicon-th-list"></span> Grupos</a>
+              <a routerLink="/groups"><span class="glyphicon glyphicon-th-list text-success disabled"></span> Grupos</a>
             </li>
             <li routerLinkActive="active">
-              <a routerLink="/departments"><span class="glyphicon glyphicon-briefcase"></span> Departamentos</a>
+              <a routerLink="/departments"><span class="glyphicon glyphicon-briefcase text-primary disabled"></span> Departamentos</a>
             </li>
             <li routerLinkActive="active">
-              <a routerLink="/suppliers"><span class="glyphicon glyphicon-shopping-cart"></span> Fornecedores</a>
+              <a routerLink="/suppliers"><span class="glyphicon glyphicon-shopping-cart text-warning disabled"></span> Fornecedores</a>
+            </li>
+            <li routerLinkActive="active">
+              <a routerLink="/products"><span class="glyphicon glyphicon-apple text-danger"></span> Produtos</a>
             </li>
           </ul>
         </li>
         <li routerLinkActive="active">
-          <a routerLink="/products"><span class="glyphicon glyphicon-apple text-danger"></span> Produtos</a>
+          <a routerLink="/tasks"><span class="glyphicon glyphicon-check text-success"></span> Tarefas</a>
         </li>
         <li routerLinkActive="active">
-          <a routerLink="/products/#{}/requests"><span class="glyphicon glyphicon-refresh text-success"></span> Requisições</a>
+          <a routerLink="/products/#{}/requests"><span class="glyphicon glyphicon-refresh text-primary disabled"></span> Requisições</a>
         </li>
       </ul>
 
@@ -56,7 +59,7 @@
 
       <ul class="nav navbar-nav navbar-right">
         <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user"></span> Cleiton Corrêa <span class="caret"></span></a>
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user text-primary"></span> Cleiton Corrêa <span class="caret"></span></a>
           <ul class="dropdown-menu">
             <li><a href="#">Perfil</a></li>
             <li><a href="#">Configurações</a></li>

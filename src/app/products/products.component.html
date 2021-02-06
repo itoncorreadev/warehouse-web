@@ -1,4 +1,4 @@
-<h1 class="page-header">Lista de Produtos</h1>
+<h4 class="page-header">Lista de Produtos</h4>
 
 <div class="well">
   <form (ngSubmit)="createProduct()">
@@ -29,14 +29,14 @@
       <td>{{ product.id }}</td>
       <td>{{ product.name }}</td>
       <td>
-        <a [routerLink]="['/products',product.id]" class="btn btn-info">
+        <a [routerLink]="['/products',product.id]" class="btn btn-primary">
           <span class="glyphicon glyphicon-info-sign"></span>
           Detalhes
-        </a>
+        </a>&nbsp;
         <a [routerLink]="['/products',product.id,'requests']" class="btn btn-success">
           <span class="glyphicon glyphicon-refresh"></span>
           Requisição
-        </a>
+        </a>&nbsp;
         <button class="btn btn-danger" (click)="deleteProduct(product)">
           <span class="glyphicon glyphicon-trash"></span>
           Excluir
