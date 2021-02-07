@@ -26,7 +26,7 @@ export class ProductService{
 
     return this.tokenHttp.get(url).pipe(
       catchError(this.handleErrors),
-      map((response: Response) => this.responseToProducts(response))
+      map((response: Response) => this.responseToProducts(response).slice(0, 3))
     )
   }
 

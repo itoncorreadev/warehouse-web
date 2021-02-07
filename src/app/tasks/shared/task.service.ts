@@ -26,7 +26,7 @@ export class TaskService{
 
     return this.tokenHttp.get(url).pipe(
       catchError(this.handleErrors),
-      map((response: Response) => this.responseToTasks(response))
+      map((response: Response) => this.responseToTasks(response).slice(0, 3))
     )
   }
 
