@@ -66,7 +66,7 @@ export class TaskDetailComponent implements OnInit, AfterViewInit{
 
   public ngAfterViewInit(){
      $("#deadline").datetimepicker({
-       sideBySide: true,
+       sideBySide: false,
        locale: 'pt-br'
      }).on('dp.change', () =>  this.form.get('deadline').setValue($("#deadline").val()));
   }

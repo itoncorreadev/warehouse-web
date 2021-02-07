@@ -86,7 +86,6 @@ export class ProductDetailComponent implements OnInit{
 
   public setProduct(product: Product): void {
     this.product = product;
-    console.log(product);
     this.form.patchValue(product);
   }
 

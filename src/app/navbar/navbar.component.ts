@@ -21,4 +21,9 @@ export class NavbarComponent{
   public userSignedIn(){
     return this.authService.userSignedIn();
   }
+
+  public userName(){
+    return this.authService.currentUserData().name;
+  }
+
 }

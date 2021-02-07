@@ -28,6 +28,10 @@ export class AuthService{
     )
   }
 
+  public currentUserData() {
+    return this.tokenService.currentUserData;
+  }
+
   public signOut(): Observable<Response>{
     return this.tokenService.signOut().pipe(
       catchError(this.handleErrors)

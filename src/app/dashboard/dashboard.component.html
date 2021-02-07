@@ -1,21 +1,55 @@
 <h4 class="page-header">Painel de Controle</h4>
 
-<table class="table">
-  <thead>
-    <tr>
-      <th>Tarefas</th>
-      <th>Ações</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let task of tasks">
-      <td>{{ task.title }}</td>
-      <td>
-        <a [routerLink]="['/tasks', task.id]" class="btn btn-primary">
-          <span class="glyphicon glyphicon-info-sign"></span>
-          Detalhes
-        </a>
-      </td>
-    </tr>
-  </tbody>
-</table>
+<div class="row">
+  <div class="col-xs-12 col-md-6">
+
+    <div class="jumbotron">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Tarefas</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let task of tasks">
+            <td>{{ task.title }}</td>
+            <td>
+              <a [routerLink]="['/tasks', task.id]" class="btn btn-primary">
+                <span class="glyphicon glyphicon-info-sign"></span>
+                Detalhes
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <div class="col-xs-12 col-md-6">
+
+    <div class="jumbotron">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Produtos</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of products">
+            <td>{{ product.name }}</td>
+            <td>
+              <a [routerLink]="['/products', product.id]" class="btn btn-primary">
+                <span class="glyphicon glyphicon-info-sign"></span>
+                Detalhes
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
