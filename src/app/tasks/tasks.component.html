@@ -3,13 +3,13 @@
 <div class="well">
   <form (ngSubmit)="createTask()">
     <div class="row">
-      <div class="col-xs-7 col-md-10">
-        <input type="text" class="form-control" [(ngModel)]="newTask.title" placeholder="Digite aqui uma nova tarefa" name="title">
+      <div class="col-xs-6 col-md-10">
+        <input type="text" class="form-control" [(ngModel)]="newTask.title" placeholder="Nova tarefa" name="title">
       </div>
-      <div class="col-xs-2 col-md-2">
+      <div class="col-xs-1 col-md-2">
         <button class="btn btn-success" type="submit">
           <span class="glyphicon glyphicon-plus"></span>
-          <!-- Adicionar Tarefa -->
+          Adicionar Tarefa
         </button>
       </div>
     </div>
