@@ -8,7 +8,7 @@ import { TaskService } from "../tasks/shared/task.service";
 
 @Component({
   selector: 'dashboard',
-  templateUrl: 'dashboard.component.html',
+  templateUrl: './dashboard.component.html',
 })
 
 export class DashboardComponent implements OnInit{

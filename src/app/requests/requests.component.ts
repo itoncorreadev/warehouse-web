@@ -1,5 +1,4 @@
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
 import { Request } from './shared/request.model';
 import { RequestService } from "./shared/request.service";
 
@@ -11,10 +10,9 @@ import { RequestService } from "./shared/request.service";
 export class RequestsComponent implements OnInit{
   public requests: Array<Request>;
   public newRequest: Request;
-  public productId = null;
   public requestTypeOptions: Array<any>;
 
-  public constructor(private requestService: RequestService, private route: ActivatedRoute){
+  public constructor(private requestService: RequestService){
     this.newRequest = new Request(null, '', '', '');
 
     this.requestTypeOptions = [

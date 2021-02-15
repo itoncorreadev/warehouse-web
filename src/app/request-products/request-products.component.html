@@ -1,0 +1,50 @@
+<h4 class="page-header">Lista de Detalhes</h4>
+
+<div class="well">
+  <form (ngSubmit)="createRequestProduct()">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="input-group">
+          <div class="col-xs-4 col-lg-4">
+            <input type="text" class="form-control" [(ngModel)]="newRequestProduct.quantity" placeholder="Quantidade" name="quantity">
+          </div>
+          <div class="col-xs-4 col-lg-4">
+            <input type="text" class="form-control" [(ngModel)]="newRequestProduct.unit_price" placeholder="Valor unitário" name="unit_price">
+          </div>
+          <div class="col-xs-4 col-lg-4">
+            <input type="text" class="form-control" [(ngModel)]="newRequestProduct.total_price" placeholder="Valor total" name="total_price">
+          </div>
+          <span class="input-group-btn">
+            <button class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Adicionar</button>
+          </span>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Descrição</th>
+      <th>Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let requestProduct of requestProducts">
+      <td>{{ requestProduct.id }}</td>
+      <td>{{ requestProduct.name }}</td>
+      <td>
+        <!-- <a [routerLink]="['/requests','request.id','request-products' requestProduct.id]" class="btn btn-primary">
+          <span class="glyphicon glyphicon-info-sign"></span>
+
+        </a>&nbsp; -->
+        <button class="btn btn-danger" (click)="deleteRequestProduct(requestProduct)">
+          <span class="glyphicon glyphicon-trash"></span>
+          <!-- Excluir -->
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>

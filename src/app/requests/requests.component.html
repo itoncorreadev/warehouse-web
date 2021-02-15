@@ -9,7 +9,6 @@
             <input type="text" class="form-control" [(ngModel)]="newRequest.date" placeholder="Data da requisição" name="date">
           </div>
           <div class="col-xs-4 col-lg-4">
-            <!-- <input type="text" class="form-control" [(ngModel)]="newRequest.request_type" placeholder="Tipo de requisição" name="request_type"> -->
             <select id="request_type" class="form-control" [(ngModel)]="newRequest.request_type" placeholder="Tipo de requisição" name="request_type">
               <option *ngFor="let option of requestTypeOptions" [value]="option.value">{{ option.text }}</option>
             </select>
@@ -17,7 +16,6 @@
           <div class="col-xs-4 col-lg-4">
             <input type="text" class="form-control" [(ngModel)]="newRequest.description" placeholder="Descrição" name="description">
           </div>
-          <!-- <input type="text" class="form-control" [(ngModel)]="newRequest.document" placeholder="Nova requisição" name="document"> -->
           <span class="input-group-btn">
             <button class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Adicionar</button>
           </span>
@@ -48,7 +46,7 @@
           <span class="glyphicon glyphicon-info-sign"></span>
           <!-- Detalhes -->
         </a>&nbsp;
-        <a [routerLink]="['/requests',request.id,'details']" class="btn btn-success">
+        <a [routerLink]="['/requests', request.id, 'request-products']" class="btn btn-success">
           <span class="glyphicon glyphicon-apple"></span>
           <!-- Requisição -->
         </a>&nbsp;

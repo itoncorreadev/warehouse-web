@@ -28,9 +28,9 @@ export class AuthService{
     )
   }
 
-  //  public currentUser(): string {
-  //    return this.tokenService.currentUserData.name;
-  //  }
+   public currentUser() {
+     return this.tokenService.currentUserData.name;
+   }
 
   public signOut(): Observable<Response>{
     return this.tokenService.signOut().pipe(
