@@ -1,0 +1,69 @@
+<h4 class="page-header">Requisição: {{ request.description }}</h4>
+
+<form [formGroup]="form" (ngSubmit)="updateRequest()">
+  <div class="row">
+
+    <!-- requestDescription -->
+    <div class="form-group col-md-3 has-feedback" [ngClass]="formUtils.fieldClassForErrorOrSuccess('description')">
+      <label for="description" class="control-label">Data da Requisição</label>
+      <input type="text" formControlName="description" id="description" class="form-control">
+      <span class="glyphicon form-control-feedback" [ngClass]="formUtils.iconClassForErrorOrSuccess('description')"></span>
+
+      <div *ngIf="formUtils.showFieldError('description')" class="text-danger">A descrição é obrigatória</div>
+    </div>
+
+    <!-- requestDate -->
+    <div class="form-group col-md-3 has-feedback" [ngClass]="formUtils.fieldClassForErrorOrSuccess('date')">
+      <label for="date" class="control-label">Data da Requisição</label>
+      <input type="text" formControlName="date" id="date" class="form-control">
+      <span class="glyphicon form-control-feedback" [ngClass]="formUtils.iconClassForErrorOrSuccess('date')"></span>
+
+      <div *ngIf="formUtils.showFieldError('date')" class="text-danger">O data é obrigatória</div>
+    </div>
+
+    <!-- requestType -->
+    <div class="form-group col-md-3 has-feedback" [ngClass]="formUtils.fieldClassForErrorOrSuccess('request_type')">
+      <label for="request_type" class="control-label">Tipo</label>
+      <select id="request_type" class="form-control" formControlName="request_type">
+        <option *ngFor="let option of requestTypeOptions" [value]="option.value">{{ option.text }}</option>
+      </select>
+      <span class="glyphicon form-control-feedback" [ngClass]="formUtils.iconClassForErrorOrSuccess('request_type')"></span>
+
+      <div *ngIf="formUtils.showFieldError('request_type')" class="text-danger">O tipo é obrigatório</div>
+    </div>
+
+    <!-- requestDocumenTypet -->
+    <div class="form-group col-md-3 has-feedback" [ngClass]="formUtils.fieldClassForErrorOrSuccess('document_type')">
+      <label for="document_type" class="control-label">Documento</label>
+      <select id="document_type" class="form-control" formControlName="document_type">
+        <option *ngFor="let option of requestDocumentOptions" [value]="option.value">{{ option.text }}</option>
+      </select>
+      <span class="glyphicon form-control-feedback" [ngClass]="formUtils.iconClassForErrorOrSuccess('document_type')"></span>
+
+      <div *ngIf="formUtils.showFieldError('document_type')" class="text-danger">O tipo do documento é obrigatório</div>
+    </div>
+
+    <!-- requestDocumentCode -->
+    <div class="form-group col-md-3 has-feedback" [ngClass]="formUtils.fieldClassForErrorOrSuccess('document_code')">
+      <label for="document_code" class="control-label">Nº Documento</label>
+      <input type="text" formControlName="document_code" id="document_code" class="form-control">
+      <span class="glyphicon form-control-feedback" [ngClass]="formUtils.iconClassForErrorOrSuccess('document_code')"></span>
+
+      <div *ngIf="formUtils.showFieldError('document_code')" class="text-danger">O nº documento é obrigatório</div>
+    </div>
+
+    <!-- requestStatus -->
+    <div class="form-group col-md-3 has-feedback" [ngClass]="formUtils.fieldClassForErrorOrSuccess('status')">
+      <label for="status" class="control-label">Status</label>
+      <select id="status" class="form-control" formControlName="status">
+        <option *ngFor="let option of requestStatusOptions" [value]="option.value">{{ option.text }}</option>
+      </select>
+      <span class="glyphicon form-control-feedback" [ngClass]="formUtils.iconClassForErrorOrSuccess('status')"></span>
+
+      <div *ngIf="formUtils.showFieldError('status')" class="text-danger">O status é obrigatório</div>
+    </div>
+
+  </div>
+  <button [disabled]="form.invalid" type="submit" class="btn btn-success">Salvar</button>&nbsp;
+  <button type="button" class="btn btn-default" (click)="goBack()">Voltar</button>
+</form>

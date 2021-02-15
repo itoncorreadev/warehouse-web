@@ -22,8 +22,8 @@ export class NavbarComponent{
     return this.authService.userSignedIn();
   }
 
-  public userName(){
-    return this.authService.currentUserData().name;
-  }
+  // public userName():string{
+  //   return this.authService.currentUser();
+  // }
 
 }

@@ -65,10 +65,10 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let product of products">
-            <td class="col-xs-7">{{ product.name }}</td>
+          <tr *ngFor="let request of requests">
+            <td class="col-xs-7">{{ request.description }}</td>
             <td>
-              <a [routerLink]="['/products', product.id]" class="btn btn-primary">
+              <a [routerLink]="['/requests', request.id]" class="btn btn-primary">
                 <span class="glyphicon glyphicon-info-sign"></span>
                 Detalhes
               </a>

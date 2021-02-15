@@ -35,6 +35,7 @@ export class ProductDetailComponent implements OnInit{
       { value: true, text: "Perresível"},
       { value: false, text: "Não peresível"}
     ];
+
     this.productStatusOptions = [
       { value: true, text: "Ativo"},
       { value: false, text: "Inativo"}
@@ -55,8 +56,7 @@ export class ProductDetailComponent implements OnInit{
 
     this.form = this.formBuilder.group({
       name: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(255)]],
-      description: [null, Validators.required],
-      category: [null],
+      description: [null],
       code: [null],
       product_type: [null],
       measure: [null],
@@ -98,7 +98,6 @@ export class ProductDetailComponent implements OnInit{
   public updateProduct(){
     this.product.name = this.form.get('name').value;
     this.product.description = this.form.get('description').value;
-    this.product.category = this.form.get('category').value;
     this.product.code = this.form.get('code').value;
     this.product.product_type = this.form.get('product_type').value;
     this.product.measure = this.form.get('measure').value;

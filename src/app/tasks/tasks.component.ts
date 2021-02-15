@@ -29,6 +29,7 @@ export class TasksComponent implements OnInit{
     if(!this.newTask.title){
       alert("A tarefa deve ter um título!")
     } else {
+      console.log(this.newTask);
       this.taskService.create(this.newTask)
         .subscribe(
           task => {
