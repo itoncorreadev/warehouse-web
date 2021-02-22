@@ -10,6 +10,7 @@ import { ProductService } from "./shared/product.service";
 export class ProductsComponent implements OnInit{
   public products: Array<Product>;
   public newProduct: Product;
+  public paginaAtual = 1;
 
   public constructor(private productService: ProductService){
     this.newProduct = new Product(null, '');

@@ -14,6 +14,7 @@ export class RequestProductsComponent implements OnInit{
   public products: Array<Product>;
   public requestProducts: Array<RequestProduct>;
   public newRequestProduct: RequestProduct;
+  public paginaAtual = 1;
 
   public constructor(private requestProductService: RequestProductService, private activatedRoute: ActivatedRoute, private productService: ProductService){
     this.newRequestProduct = new RequestProduct(null, null, '', null);

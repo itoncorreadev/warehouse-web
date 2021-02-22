@@ -11,6 +11,7 @@ export class RequestsComponent implements OnInit{
   public requests: Array<Request>;
   public newRequest: Request;
   public requestTypeOptions: Array<any>;
+  public paginaAtual = 1;
 
   public constructor(private requestService: RequestService){
     this.newRequest = new Request(null, '', '', '#');

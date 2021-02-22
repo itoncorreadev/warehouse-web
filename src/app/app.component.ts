@@ -9,11 +9,6 @@ import { TokenService } from "./shared/token.service";
 
 export class AppComponent {
 
-  public paginaAtual = 1;
-  public paginaAtualTask = 1;
-  public paginaAtualProduct = 1;
-  public paginaAtualRequest = 1;
-
   title = 'Warehouse';
 
   public constructor(private tokenService: TokenService){

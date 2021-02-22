@@ -10,6 +10,7 @@ import { TaskService } from './shared/task.service';
 export class TasksComponent implements OnInit{
   public tasks: Array<Task> ;
   public newTask: Task;
+  public paginaAtual = 1;
 
   public constructor(private taskService: TaskService){
     this.newTask = new Task(null, '');

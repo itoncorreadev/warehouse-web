@@ -17,6 +17,9 @@ export class DashboardComponent implements OnInit{
   public products: Product[];
   public requests: Request[];
   public tableUtils: TableUtils;
+  public paginaAtualTask = 1;
+  public paginaAtualProduct = 1;
+  public paginaAtualRequest = 1;
 
   public constructor(private taskService: TaskService, private productService: ProductService, private requestService: RequestService){}
 
