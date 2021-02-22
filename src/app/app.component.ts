@@ -8,12 +8,18 @@ import { TokenService } from "./shared/token.service";
 })
 
 export class AppComponent {
+
+  public paginaAtual = 1;
+  public paginaAtualTask = 1;
+  public paginaAtualProduct = 1;
+  public paginaAtualRequest = 1;
+
   title = 'Warehouse';
 
   public constructor(private tokenService: TokenService){
     this.tokenService.init({
-      apiBase: 'https://warehouse-rails-api.herokuapp.com',
-      //apiBase: 'http://api.warehouse.test:3000',
+      //apiBase: 'https://warehouse-rails-api.herokuapp.com',
+      apiBase: 'http://api.warehouse.test:3000',
       globalOptions: {
         headers: {
           'Content-Type': 'application/json',

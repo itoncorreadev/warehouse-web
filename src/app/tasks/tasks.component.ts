@@ -50,4 +50,11 @@ export class TasksComponent implements OnInit{
         )
     }
   }
+
+  public colorClassForStatusTask(fieldName: string){
+    return {
+      "success": fieldName == "Feita",
+      "danger": fieldName == "Pendente"
+    }
+  }
 }

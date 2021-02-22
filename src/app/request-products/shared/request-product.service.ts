@@ -95,9 +95,12 @@ export class RequestProductService{
         item.id,
         item.attributes.quantity,
         item.attributes['unit-price'],
+        item.attributes['product-id'],
         item.attributes['total-price'],
         item.attributes.observation,
-        item.attributes.product.name
+        item.attributes.product.name,
+        item.attributes['unit-price-br'],
+        item.attributes['calc-total-price-br']
       )
       requestProducts.push(requestProduct);
     })
@@ -109,9 +112,12 @@ export class RequestProductService{
       response.json().data.id,
       response.json().data.attributes.quantity,
       response.json().data.attributes['unit-price'],
+      response.json().data.attributes['product-id'],
       response.json().data.attributes['total-price'],
       response.json().data.attributes.observation,
-      response.json().data.attributes.product.name
+      response.json().data.attributes.product.name,
+      response.json().data.attributes['unit-price-br'],
+      response.json().data.attributes['calc-total-price-br']
     )
   }
 }

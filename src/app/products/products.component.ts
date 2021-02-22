@@ -50,4 +50,13 @@ export class ProductsComponent implements OnInit{
     }
   }
 
+  public colorClassForStatus(fieldName: string){
+    return {
+      "success": fieldName == "success",
+      "warning": fieldName == "warning",
+      "danger": fieldName == "danger",
+      "info": fieldName == "info"
+    }
+  }
+
 }

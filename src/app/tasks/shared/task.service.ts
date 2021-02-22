@@ -26,7 +26,7 @@ export class TaskService{
 
     return this.tokenHttp.get(url).pipe(
       catchError(this.handleErrors),
-      map((response: Response) => this.responseToTasks(response).slice(0, 3))
+      map((response: Response) => this.responseToTasks(response).slice(0, 15))
     )
   }
 
@@ -93,7 +93,8 @@ export class TaskService{
         item.attributes.title,
         item.attributes.description,
         item.attributes.done,
-        item.attributes['deadline-to-br']
+        item.attributes['deadline-to-br'],
+        item.attributes['done-description']
       )
 
       tasks.push(task)
@@ -108,7 +109,8 @@ export class TaskService{
       response.json().data.attributes.title,
       response.json().data.attributes.description,
       response.json().data.attributes.done,
-      response.json().data.attributes['deadline-to-br']
+      response.json().data.attributes['deadline-to-br'],
+      response.json().data.attributes['done-description']
     )
   }
 }

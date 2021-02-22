@@ -26,7 +26,7 @@ export class ProductService{
 
     return this.tokenHttp.get(url).pipe(
       catchError(this.handleErrors),
-      map((response: Response) => this.responseToProducts(response).slice(0, 3))
+      map((response: Response) => this.responseToProducts(response).slice(0, 15))
     )
   }
 
@@ -97,7 +97,11 @@ export class ProductService{
         item.attributes.med,
         item.attributes.max,
         item.attributes.location,
-        item.attributes.status
+        item.attributes.status,
+        item.attributes['quantity-in'],
+        item.attributes['quantity-out'],
+        item.attributes['quantity-inventory'],
+        item.attributes['quantity-measure']
       )
       products.push(product)
     })
@@ -117,7 +121,11 @@ export class ProductService{
       response.json().data.attributes.med,
       response.json().data.attributes.max,
       response.json().data.attributes.location,
-      response.json().data.attributes.status
+      response.json().data.attributes.status,
+      response.json().data.attributes['quantity-in'],
+      response.json().data.attributes['quantity-out'],
+      response.json().data.attributes['quantity-inventory'],
+      response.json().data.attributes['quantity-measure']
     )
   }
 }

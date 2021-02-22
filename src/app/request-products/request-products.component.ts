@@ -1,5 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from '@angular/router';
+import { Product } from "../products/shared/product.model";
+import { ProductService } from "../products/shared/product.service";
 import { RequestProduct } from './shared/request-product.model';
 import { RequestProductService } from './shared/request-product.service';
 
@@ -9,11 +11,12 @@ import { RequestProductService } from './shared/request-product.service';
 })
 
 export class RequestProductsComponent implements OnInit{
+  public products: Array<Product>;
   public requestProducts: Array<RequestProduct>;
   public newRequestProduct: RequestProduct;
 
-  public constructor(private requestProductService: RequestProductService, private activatedRoute: ActivatedRoute){
-    this.newRequestProduct = new RequestProduct(null, null, '', '', '', '');
+  public constructor(private requestProductService: RequestProductService, private activatedRoute: ActivatedRoute, private productService: ProductService){
+    this.newRequestProduct = new RequestProduct(null, null, '', null);
   }
 
   public ngOnInit(){
@@ -23,6 +26,12 @@ export class RequestProductsComponent implements OnInit{
     this.requestProductService.getAll(requestId)
       .subscribe(
         requestProduct => this.requestProducts = requestProduct.sort((a, b) => b.id - a.id),
+        error => alert("Ocorreu um error no servidor, tente mais tarde.")
+      )
+
+      this.productService.getAll()
+      .subscribe(
+        products => this.products = products.sort((a, b) => b.id - a.id),
         error => alert("Ocorreu um error no servidor, tente mais tarde.")
       )
   }
@@ -38,7 +47,7 @@ export class RequestProductsComponent implements OnInit{
         .subscribe(
           requestProduct => {
             this.requestProducts.unshift(requestProduct);
-            this.newRequestProduct = new RequestProduct(null, null, '', '', '', '');
+            this.newRequestProduct = new RequestProduct(null, null, '', null);
           },
           () => alert("Ocorreu um erro no servidor, tente mais tarde!")
         )
@@ -54,4 +63,5 @@ export class RequestProductsComponent implements OnInit{
         )
     }
   }
+
 }

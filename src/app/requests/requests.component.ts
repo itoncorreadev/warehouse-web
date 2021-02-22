@@ -13,9 +13,11 @@ export class RequestsComponent implements OnInit{
   public requestTypeOptions: Array<any>;
 
   public constructor(private requestService: RequestService){
-    this.newRequest = new Request(null, '', '', '');
+    this.newRequest = new Request(null, '', '', '#');
 
     this.requestTypeOptions = [
+      { value: '', text: "Selecione o tipo de Requisição"},
+      { value: '', text: "-------------------------------"},
       { value: 'in', text: "Entrada de Produtos"},
       { value: 'out', text: "Saída de Produtos"},
       { value: 'devolution', text: "Devolução"}
@@ -63,6 +65,14 @@ export class RequestsComponent implements OnInit{
       "glyphicon-arrow-down text-success": fieldName == "in",
       "glyphicon-arrow-up text-danger": fieldName == "out",
       "glyphicon-refresh text-warning": fieldName == "devolution"
+    }
+  }
+
+  public colorClassForInOut(fieldName: string){
+    return {
+      "success": fieldName == "in",
+      "danger": fieldName == "out",
+      "warning": fieldName == "devolution"
     }
   }
 

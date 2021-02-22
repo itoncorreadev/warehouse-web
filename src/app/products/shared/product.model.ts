@@ -10,6 +10,10 @@ export class Product {
     public med?: number,
     public max?: number,
     public location?: string,
-    public status?: boolean
+    public status?: boolean,
+    public quantity_in?: number,
+    public quantity_out?: number,
+    public quantity_inventory?: number,
+    public quantity_measure?: string
   ){}
 }
