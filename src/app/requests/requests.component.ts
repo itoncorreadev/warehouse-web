@@ -12,9 +12,10 @@ export class RequestsComponent implements OnInit{
   public newRequest: Request;
   public requestTypeOptions: Array<any>;
   public paginaAtual = 1;
+  public errorText = '';
 
   public constructor(private requestService: RequestService){
-    this.newRequest = new Request(null, '', '', '#');
+    this.newRequest = new Request(null, '', '', '');
 
     this.requestTypeOptions = [
       { value: '', text: "Selecione o tipo de Requisição"},
@@ -35,19 +36,24 @@ export class RequestsComponent implements OnInit{
 
   public createRequest(){
     this.newRequest.request_type = this.newRequest.request_type.trim();
+    this.newRequest.description = this.newRequest.description.trim();
 
     if(!this.newRequest.request_type){
-      alert("A requisição deve ter um tipo!")
+      this.errorText = "A requisição deve ter um tipo!";
     } else {
-      console.log(this.newRequest);
-      this.requestService.create(this.newRequest)
-        .subscribe(
-          request => {
-            this.requests.unshift(request);
-            this.newRequest = new Request(null, '', '', '');
-          },
-          () => alert("Ocorreu um erro no servidor, tente mais tarde!")
-        )
+      if(!this.newRequest.description){
+        this.errorText = "A requisição deve ter uma descrição!";
+      } else {
+        console.log(this.newRequest);
+        this.requestService.create(this.newRequest)
+          .subscribe(
+            request => {
+              this.requests.unshift(request);
+              this.newRequest = new Request(null, '', '', '');
+            },
+            () => alert("Ocorreu um erro no servidor, tente mais tarde!")
+          )
+      }
     }
   }
 

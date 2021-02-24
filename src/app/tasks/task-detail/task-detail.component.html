@@ -1,10 +1,12 @@
-<h4 class="page-header">Tarefa: {{ task.title }}</h4>
+<div class="page-header">
+  <button type="button" class="btn btn-default " (click)="goBack()"><span class="glyphicon glyphicon-chevron-left"></span> Voltar</button>
+</div>
 
 <form [formGroup]="form" (ngSubmit)="updateTask()">
   <div class="row">
 
     <!-- taskTitle -->
-    <div class="form-group col-md-6 has-feedback" [ngClass]="formUtils.fieldClassForErrorOrSuccess('title')">
+    <div class="form-group col-md-3 has-feedback" [ngClass]="formUtils.fieldClassForErrorOrSuccess('title')">
       <label for="title" class="control-label">Título</label>
       <input type="text" formControlName="title" id="title" class="form-control">
       <span class="glyphicon form-control-feedback" [ngClass]="formUtils.iconClassForErrorOrSuccess('title')"></span>
@@ -35,6 +37,17 @@
 
       <div *ngIf="formUtils.showFieldError('done')" class="text-danger">A situação é obrigatório</div>
     </div>
+
+    <!-- taskUser -->
+    <div class="form-group col-md-3 has-feedback" [ngClass]="formUtils.fieldClassForErrorOrSuccess('user_id')">
+      <label for="user_id" class="control-label">Usuário</label>
+      <select id="user_id" class="form-control" formControlName="user_id">
+        <option *ngFor="let user of users" [value]="user.id">{{ user.name }}</option>
+      </select>
+      <span class="glyphicon form-control-feedback" [ngClass]="formUtils.iconClassForErrorOrSuccess('user_id')"></span>
+
+      <div *ngIf="formUtils.showFieldError('user_id')" class="text-danger">A situação é obrigatório</div>
+    </div>
   </div>
 
   <div class="row">
@@ -45,6 +58,5 @@
     </div>
   </div>
 
-  <button [disabled]="form.invalid" type="submit" class="btn btn-success">Salvar</button>&nbsp;
-  <button type="button" class="btn btn-default" (click)="goBack()">Voltar</button>
+  <button [disabled]="form.invalid" type="submit" class="btn btn-primary">Salvar</button>
 </form>

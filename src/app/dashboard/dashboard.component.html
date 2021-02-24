@@ -3,62 +3,66 @@
 <div class="row">
   <div class="col-xs-12 col-md-6">
 
-    <div class="panel panel-default">
+    <div class="panel panel-default animate__animated animate__fadeInLeft" style="height: 214px;">
       <div class="panel-heading"><h4><span class="glyphicon glyphicon-check text-success"></span> Tarefas</h4></div>
-      <table class="table">
-        <thead>
-          <tr>
-            <th class="col-xs-7">Tarefas</th>
-            <th class="col-xs-7">Status</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let task of tasks | paginate: {  id: 'taskPage', itemsPerPage: 3, currentPage: paginaAtualTask}; let t = index" [ngClass]="colorClassForStatusTask(task.done_description)">
-            <td class="col-xs-7">{{ task.title }}</td>
-            <td class="col-xs-7">{{ task.done_description }}</td>
-            <td  class="text-right">
-              <a [routerLink]="['/tasks', task.id]" class="btn btn-primary">
-                <span class="glyphicon glyphicon-info-sign"></span>
-                <!-- Detalhes -->
-              </a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <div class="text-center">
-        <pagination-controls id="taskPage" (pageChange)="paginaAtualTask = $event" previousLabel="Anterior" nextLabel="Próximo" responsive="true"></pagination-controls>
+      <div style="overflow-y: hidden">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Tarefas</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let task of tasks | paginate: {  id: 'taskPage', itemsPerPage: 3, currentPage: paginaAtualTask}; let t = index" [ngClass]="colorClassForStatusTask(task.done_description)" [routerLink]="['/tasks', task.id]">
+              <td class="col-xs-7">{{ task.title }}</td>
+              <td><span class="label" [ngClass]="labelClassForStatusTask(task.done_description)">{{ task.done_description }}</span></td>
+              <!-- <td  class="text-right">
+                <a [routerLink]="['/tasks', task.id]" class="btn btn-primary">
+                  <span class="glyphicon glyphicon-info-sign"></span>
+                </a>
+              </td> -->
+            </tr>
+          </tbody>
+        </table>
       </div>
+    </div>
+
+    <div class="text-center">
+      <pagination-controls id="taskPage" (pageChange)="paginaAtualTask = $event" previousLabel="Anterior" nextLabel="Próximo" responsive="true"></pagination-controls>
     </div>
 
   </div>
 
   <div class="col-xs-12 col-md-6">
 
-    <div class="panel panel-default">
+    <div class="panel panel-default panel-default animate__animated animate__fadeInRight" style="height: 214px;">
       <div class="panel-heading"><h4><span class="glyphicon glyphicon-apple text-danger disabled"></span> Produtos</h4></div>
-      <table class="table" ng-controller="product">
-        <thead>
-          <tr>
-            <th class="col-xs-7">Produtos</th>
-            <th class="col-xs-7">Estoque</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let product of products | paginate: { id: 'productPage', itemsPerPage: 3, currentPage: paginaAtualProduct}; let p = index" [ngClass]="colorClassForStatusProduct(product.quantity_measure)">
-            <td class="col-xs-7">{{ product.name }}</td>
-            <td>{{ product.quantity_inventory }} {{ product.measure}}</td>
-            <td  class="text-right">
-              <a [routerLink]="['/products', product.id]" class="btn btn-primary">
-                <span class="glyphicon glyphicon-info-sign"></span>
-                <!-- Detalhes -->
-              </a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <div class="text-center">
-        <pagination-controls id="productPage" (pageChange)="paginaAtualProduct = $event" previousLabel="Anterior" nextLabel="Próximo" responsive="true"></pagination-controls>
+      <div style="overflow-y: hidden">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Produtos</th>
+              <th>Estoque</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let product of products | paginate: { id: 'productPage', itemsPerPage: 3, currentPage: paginaAtualProduct}; let p = index" [ngClass]="colorClassForStatusProduct(product.quantity_measure)" [routerLink]="['/products', product.id]">
+              <td>{{ product.name }}</td>
+              <td>{{ product.quantity_inventory }} {{ product.measure}}</td>
+              <!-- <td  class="text-right">
+                <a [routerLink]="['/products', product.id]" class="btn btn-primary">
+                  <span class="glyphicon glyphicon-info-sign"></span>
+                </a>
+              </td> -->
+            </tr>
+          </tbody>
+        </table>
       </div>
+    </div>
+
+    <div class="text-center">
+      <pagination-controls id="productPage" (pageChange)="paginaAtualProduct = $event" previousLabel="Anterior" nextLabel="Próximo" responsive="true"></pagination-controls>
     </div>
 
   </div>
@@ -66,38 +70,38 @@
 <div class="row">
   <div class="col-xs-12 col-md-12">
 
-    <div class="panel panel-default">
+    <div class="panel panel-default animate__animated animate__fadeInUp" style="height: 214px;">
       <div class="panel-heading"><h4><span class="glyphicon glyphicon-refresh text-primary disabled"></span> Requisições</h4></div>
-      <table class="table">
-        <thead>
-          <tr>
-            <th>Requisições</th>
-            <th>Tipo</th>
-            <th>Data</th>
-            <th>Name</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let request of requests | paginate: {  id: 'requestPage', itemsPerPage: 3, currentPage: paginaAtualRequest}; let r = index" [ngClass]="colorClassForInOut(request.request_type)">
-            <td>{{ request.description }}</td>
-            <td>
-              <span class="glyphicon" [ngClass]="iconClassForInOut(request.request_type)"></span>
-               {{ request.request_type }}
-            </td>
-            <td>{{ request.date }}</td>
-            <td>{{ request.name }}</td>
-            <td  class="text-right">
-              <a [routerLink]="['/requests', request.id]" class="btn btn-primary">
-                <span class="glyphicon glyphicon-info-sign"></span>
-                <!-- Detalhes -->
-              </a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-      <div class="text-center">
-        <pagination-controls id="requestPage" (pageChange)="paginaAtualRequest = $event" previousLabel="Anterior" nextLabel="Próximo" responsive="true"></pagination-controls>
+      <div style="overflow-y: hidden">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>Requisições</th>
+              <th>Tipo</th>
+              <th>Name</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let request of requests | paginate: {  id: 'requestPage', itemsPerPage: 3, currentPage: paginaAtualRequest}; let r = index" [ngClass]="colorClassForInOut(request.request_type)" [routerLink]="['/requests', request.id]">
+              <td>{{ request.description }}</td>
+              <td>
+                <span class="glyphicon" [ngClass]="iconClassForInOut(request.request_type)"></span>
+                 {{ request.request_type }}
+              </td>
+              <td>{{ request.name }}</td>
+              <!-- <td  class="text-right">
+                <a [routerLink]="['/requests', request.id]" class="btn btn-primary">
+                  <span class="glyphicon glyphicon-info-sign"></span>
+                </a>
+              </td> -->
+            </tr>
+          </tbody>
+        </table>
       </div>
+    </div>
+
+    <div class="text-center">
+      <pagination-controls id="requestPage" (pageChange)="paginaAtualRequest = $event" previousLabel="Anterior" nextLabel="Próximo" responsive="true"></pagination-controls>
     </div>
 
   </div>

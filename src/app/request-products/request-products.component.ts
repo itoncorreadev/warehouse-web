@@ -1,3 +1,4 @@
+import { Location } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from '@angular/router';
 import { Product } from "../products/shared/product.model";
@@ -16,7 +17,12 @@ export class RequestProductsComponent implements OnInit{
   public newRequestProduct: RequestProduct;
   public paginaAtual = 1;
 
-  public constructor(private requestProductService: RequestProductService, private activatedRoute: ActivatedRoute, private productService: ProductService){
+  public constructor(
+    private requestProductService: RequestProductService,
+    private activatedRoute: ActivatedRoute,
+    private productService: ProductService,
+    private location: Location
+  ){
     this.newRequestProduct = new RequestProduct(null, null, '', null);
   }
 
@@ -36,6 +42,7 @@ export class RequestProductsComponent implements OnInit{
         error => alert("Ocorreu um error no servidor, tente mais tarde.")
       )
   }
+
 
   public createRequestProduct(){
     this.newRequestProduct.quantity = this.newRequestProduct.quantity;
@@ -63,6 +70,10 @@ export class RequestProductsComponent implements OnInit{
           () => "Ocorreu um erro no servidor, tente novamente mais tarde!",
         )
     }
+  }
+
+  public goBack(){
+    this.location.back();
   }
 
 }

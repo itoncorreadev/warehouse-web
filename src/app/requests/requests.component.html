@@ -3,56 +3,61 @@
 <div class="well">
   <form (ngSubmit)="createRequest()">
     <div class="row">
-      <div class="col-lg-12">
+
+      <div class="form-group col-md-6 has-feedback">
+        <select id="request_type" class="form-control" [(ngModel)]="newRequest.request_type" name="request_type">
+          <option *ngFor="let option of requestTypeOptions" [value]="option.value">{{ option.text }}</option>
+        </select>
+      </div>
+      <div class="form-group col-md-6 has-feedback">
         <div class="input-group">
-          <select id="request_type" class="form-control" [(ngModel)]="newRequest.request_type" placeholder="Tipo de requisição" name="request_type">
-            <option *ngFor="let option of requestTypeOptions" [value]="option.value">{{ option.text }}</option>
-          </select>
+          <input type="text" class="form-control" [(ngModel)]="newRequest.description" placeholder="Descrição" name="description">
           <span class="input-group-btn">
             <button class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Adicionar</button>
           </span>
         </div>
       </div>
+
     </div>
   </form>
 </div>
 
-<div class="panel panel-default">
+<div class="panel panel-default animate__animated animate__fadeInUp">
   <div class="panel-heading"><span class="glyphicon glyphicon-refresh text-primary"></span> Requisições</div>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Descrição</th>
-        <th>Tipo</th>
-        <th>Usuário</th>
-        <th>Ações</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let request of requests | paginate: { itemsPerPage: 5, currentPage: paginaAtual}; let i = index" [ngClass]="colorClassForInOut(request.request_type)">
-        <td>{{ request.id }}</td>
-        <td>{{ request.description }}</td>
-        <td><span class="glyphicon" [ngClass]="iconClassForInOut(request.request_type)"></span> {{ request.request_type }}</td>
-        <td>{{ request.name }}</td>
-        <td>
-          <a [routerLink]="['/requests', request.id]" class="btn btn-primary">
-            <span class="glyphicon glyphicon-info-sign"></span>
-            <!-- Detalhes -->
-          </a>&nbsp;
-          <a [routerLink]="['/requests', request.id, 'request-products']" class="btn btn-success">
-            <span class="glyphicon glyphicon-apple"></span>
-            <!-- Requisição -->
-          </a>&nbsp;
-          <button class="btn btn-danger" (click)="deleteRequest(request)">
-            <span class="glyphicon glyphicon-trash"></span>
-            <!-- Excluir -->
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-<div class="text-center">
-  <pagination-controls (pageChange)="paginaAtual = $event" previousLabel="Anterior" nextLabel="Próximo" responsive="true"></pagination-controls>
+  <div style="overflow-y: hidden">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Descrição</th>
+          <th>Tipo</th>
+          <th>Usuário</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let request of requests | paginate: { itemsPerPage: 5, currentPage: paginaAtual}; let i = index" [ngClass]="colorClassForInOut(request.request_type)" [routerLink]="['/requests', request.id]">
+          <td>{{ request.id }}</td>
+          <td>{{ request.description }}</td>
+          <td><span class="glyphicon" [ngClass]="iconClassForInOut(request.request_type)"></span> {{ request.request_type }}</td>
+          <td>{{ request.name }}</td>
+          <td>
+            <!-- <a [routerLink]="['/requests', request.id]" class="btn btn-primary">
+              <span class="glyphicon glyphicon-info-sign"></span>
+            </a>&nbsp; -->
+            <a [routerLink]="['/requests', request.id, 'request-products']" class="btn btn-success">
+              <span class="glyphicon glyphicon-apple"></span>
+              <!-- Requisição -->
+            </a>&nbsp;
+            <button class="btn btn-danger" (click)="deleteRequest(request)">
+              <span class="glyphicon glyphicon-trash"></span>
+              <!-- Excluir -->
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="text-center">
+    <pagination-controls (pageChange)="paginaAtual = $event" previousLabel="Anterior" nextLabel="Próximo" responsive="true"></pagination-controls>
+  </div>
 </div>

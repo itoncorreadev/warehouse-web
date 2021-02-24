@@ -30,7 +30,7 @@ export class RequestProductService{
 
     return this.tokenHttp.get(url).pipe(
       catchError(this.handleErrors),
-      map((response: Response) => this.responseToRequestProducts(response).slice(0, 3))
+      map((response: Response) => this.responseToRequestProducts(response).slice(0, 15))
     )
   }
 

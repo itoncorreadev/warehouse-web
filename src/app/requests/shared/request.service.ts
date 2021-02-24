@@ -27,7 +27,7 @@ export class RequestService{
 
     return this.tokenHttp.get(url).pipe(
       catchError(this.handleErrors),
-      map((response: Response) => this.responseToRequests(response).slice(0, 3))
+      map((response: Response) => this.responseToRequests(response).slice(0, 15))
     )
   }
 

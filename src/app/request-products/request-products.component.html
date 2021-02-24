@@ -1,11 +1,17 @@
-<h4 class="page-header">Lista de Detalhes</h4>
+<div class="page-header">
+  <button type="button" class="btn btn-default " (click)="goBack()"><span class="glyphicon glyphicon-chevron-left"></span> Voltar</button>
+  <br>
+  <br>
+  <h4>Lista de Detalhes</h4>
+</div>
+
 
 <div class="well">
   <form (ngSubmit)="createRequestProduct()">
     <div class="row">
       <div class="form-group col-md-4 has-feedback">
         <select id="product_id" class="form-control" [(ngModel)]="newRequestProduct.product_id" name="product_id">
-          <option value="0" [selected]="0">Selecione um produto</option>
+          <option value="" selected>Selecione um produto</option>
           <option value="">---------------------</option>
           <option *ngFor="let product of products" [value]="product.id">{{ product.name }}</option>
         </select>
@@ -15,7 +21,7 @@
       </div>
       <div class="form-group col-md-4 has-feedback">
         <div class="input-group">
-          <input type="text" class="form-control" [(ngModel)]="newRequestProduct.unit_price" placeholder="Preço unitário" name="unit_price">
+          <input type="text" class="form-control" [(ngModel)]="newRequestProduct.unit_price" placeholder="Preço unitário (Ex: 2.99)" name="unit_price">
           <span class="input-group-btn">
             <button class="btn btn-success"><span class="glyphicon glyphicon-plus"></span> Adicionar</button>
           </span>
@@ -25,40 +31,41 @@
   </form>
 </div>
 
-<div class="panel panel-default">
+<div class="panel panel-default animate__animated animate__fadeInUp">
   <div class="panel-heading"><span class="glyphicon glyphicon-apple text-danger"></span> Requisição de Produtos</div>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Descrição</th>
-        <th>Quantidade</th>
-        <th>Preço Unitário</th>
-        <th>Preço Total</th>
-        <th>Ações</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let requestProduct of requestProducts | paginate: { itemsPerPage: 5, currentPage: paginaAtual}; let i = index">
-        <td>{{ requestProduct.id }}</td>
-        <td>{{ requestProduct.name }}</td>
-        <td>{{ requestProduct.quantity }} {{requestProduct.measure}}</td>
-        <td>{{ requestProduct.unit_price_br }}</td>
-        <td>{{ requestProduct.calc_total_price_br }}</td>
-        <td>
-          <!-- <a [routerLink]="['/requests','request.id','request-products' requestProduct.id]" class="btn btn-primary">
-            <span class="glyphicon glyphicon-info-sign"></span>
+  <div style="overflow-y: hidden">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Descrição</th>
+          <th>Quantidade</th>
+          <th>Preço Unitário</th>
+          <th>Preço Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let requestProduct of requestProducts | paginate: { itemsPerPage: 5, currentPage: paginaAtual}; let i = index" class="info">
+          <td>{{ requestProduct.id }}</td>
+          <td>{{ requestProduct.name }}</td>
+          <td>{{ requestProduct.quantity }} {{requestProduct.measure}}</td>
+          <td>{{ requestProduct.unit_price_br }}</td>
+          <td>{{ requestProduct.calc_total_price_br }}</td>
+          <td>
+            <!-- <a [routerLink]="['/requests','request.id','request-products' requestProduct.id]" class="btn btn-primary">
+              <span class="glyphicon glyphicon-info-sign"></span>
 
-          </a>&nbsp; -->
-          <button class="btn btn-danger" (click)="deleteRequestProduct(requestProduct)">
-            <span class="glyphicon glyphicon-trash"></span>
-            <!-- Excluir -->
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-<div class="text-center">
-  <pagination-controls (pageChange)="paginaAtual = $event" previousLabel="Anterior" nextLabel="Próximo" responsive="true"></pagination-controls>
+            </a>&nbsp; -->
+            <button class="btn btn-danger" (click)="deleteRequestProduct(requestProduct)">
+              <span class="glyphicon glyphicon-trash"></span>
+              <!-- Excluir -->
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="text-center">
+    <pagination-controls (pageChange)="paginaAtual = $event" previousLabel="Anterior" nextLabel="Próximo" responsive="true"></pagination-controls>
+  </div>
 </div>

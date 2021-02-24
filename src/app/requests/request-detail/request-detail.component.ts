@@ -45,9 +45,9 @@ export class RequestDetailComponent implements OnInit{
 
     this.form = this.formBuilder.group({
       date: [null],
-      request_type: [null],
-      description: [null],
-      document_type: [null, Validators.required],
+      request_type: [null, Validators.required],
+      description: [null,  Validators.required],
+      document_type: [null],
       document_code: [null],
       status: [null]
     })
@@ -83,6 +83,7 @@ export class RequestDetailComponent implements OnInit{
     this.request.document_code = this.form.get('document_code').value;
     this.request.date = this.form.get('date').value;
     this.request.request_type = this.form.get('request_type').value;
+    this.request.description = this.form.get('description').value;
     this.request.status = this.form.get('status').value;
 
     this.requestService.update(this.request)

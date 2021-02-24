@@ -15,39 +15,42 @@
   </form>
 </div>
 
-<div class="panel panel-default">
+
+
+<div class="panel panel-default animate__animated animate__fadeInUp">
   <div class="panel-heading"><span class="glyphicon glyphicon-apple text-danger"></span> Produtos</div>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Produto</th>
-        <th>Qtd. Entrada</th>
-        <th>Qtd. Saída</th>
-        <th>Qtd. Estoque</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let product of products | paginate: { itemsPerPage: 5, currentPage: paginaAtual}; let i = index" [ngClass]="colorClassForStatus(product.quantity_measure)">
-        <td>{{ product.id }}</td>
-        <td>{{ product.name }}</td>
-        <td>{{ product.quantity_in }} {{ product.measure}}</td>
-        <td>{{ product.quantity_out }} {{ product.measure}}</td>
-        <td>{{ product.quantity_inventory }} {{ product.measure}}</td>
-        <td>
-          <a [routerLink]="['/products',product.id]" class="btn btn-primary">
-            <span class="glyphicon glyphicon-info-sign"></span>
-            <!-- Detalhes -->
-          </a>&nbsp;
-          <button class="btn btn-danger" (click)="deleteProduct(product)">
-            <span class="glyphicon glyphicon-trash"></span>
-            <!-- Excluir -->
-          </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-<div class="text-center">
-  <pagination-controls (pageChange)="paginaAtual = $event" previousLabel="Anterior" nextLabel="Próximo" responsive="true"></pagination-controls>
+  <div style="overflow-y: hidden">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Produto</th>
+          <th>Qtd. Entrada</th>
+          <th>Qtd. Saída</th>
+          <th>Qtd. Estoque</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of products | paginate: { itemsPerPage: 5, currentPage: paginaAtual}; let i = index" [ngClass]="colorClassForStatus(product.quantity_measure)" [routerLink]="['/products',product.id]">
+          <td>{{ product.id }}</td>
+          <td>{{ product.name }}</td>
+          <td>{{ product.quantity_in }} {{ product.measure}}</td>
+          <td>{{ product.quantity_out }} {{ product.measure}}</td>
+          <td>{{ product.quantity_inventory }} {{ product.measure}}</td>
+          <td>
+            <!-- <a [routerLink]="['/products',product.id]" class="btn btn-primary">
+              <span class="glyphicon glyphicon-info-sign"></span>
+            </a>&nbsp; -->
+            <button class="btn btn-danger" (click)="deleteProduct(product)">
+              <span class="glyphicon glyphicon-trash"></span>
+              <!-- Excluir -->
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="text-center">
+    <pagination-controls (pageChange)="paginaAtual = $event" previousLabel="Anterior" nextLabel="Próximo" responsive="true"></pagination-controls>
+  </div>
 </div>

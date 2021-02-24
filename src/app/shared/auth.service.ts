@@ -23,14 +23,18 @@ export class AuthService{
       email: uid,
       password: password
     }
+
+    console.log(signInData);
+
     return this.tokenService.signIn(signInData).pipe(
       catchError(this.handleErrors)
     )
+
   }
 
-   public currentUser() {
-     return this.tokenService.currentUserData.name;
-   }
+  public currentUser() {
+    return this.tokenService.currentUserData.name;
+  }
 
   public signOut(): Observable<Response>{
     return this.tokenService.signOut().pipe(

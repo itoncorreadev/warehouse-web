@@ -67,6 +67,19 @@ export class DashboardComponent implements OnInit{
     }
   }
 
+  public labelClassForStatusTask(fieldName: string){
+    return {
+      "label-success": fieldName == "Feita",
+      "label-danger animate__bounce animate__infinite": fieldName == "Pendente"
+    }
+  }
+
+  public animatedClassForStatusTask(fieldName: string){
+    return {
+      "animate__bounce animate__infinite": fieldName == "Pendente"
+    }
+  }
+
   public colorClassForStatusProduct(fieldName: string){
     return {
       "success": fieldName == "success",

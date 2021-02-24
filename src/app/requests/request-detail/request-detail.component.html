@@ -1,4 +1,6 @@
-<h4 class="page-header">Requisição: {{ request.description }}</h4>
+<div class="page-header">
+  <button type="button" class="btn btn-default" (click)="goBack()"><span class="glyphicon glyphicon-chevron-left"></span> Voltar</button>
+</div>
 
 <form [formGroup]="form" (ngSubmit)="updateRequest()">
   <div class="row">
@@ -64,6 +66,5 @@
     </div>
 
   </div>
-  <button [disabled]="form.invalid" type="submit" class="btn btn-success">Salvar</button>&nbsp;
-  <button type="button" class="btn btn-default" (click)="goBack()">Voltar</button>
+  <button [disabled]="form.invalid" type="submit" class="btn btn-primary">Salvar</button>
 </form>

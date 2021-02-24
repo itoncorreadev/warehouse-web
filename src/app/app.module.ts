@@ -21,12 +21,12 @@ import { RequestsComponent } from "./requests/requests.component";
 import { RequestService } from "./requests/shared/request.service";
 import { AuthService } from "./shared/auth.service";
 import { TokenService } from "./shared/token.service";
+import { UserService } from "./shared/user.service";
 import { SignInFormComponent } from "./sign-in-form/sign-in-form.component";
 import { SignUpFormComponent } from "./sign-up-form/sign-up-form.component";
 import { TaskService } from "./tasks/shared/task.service";
 import { TaskDetailComponent } from "./tasks/task-detail/task-detail.component";
 import { TasksComponent } from './tasks/tasks.component';
-
 
 @NgModule({
   declarations: [
@@ -62,7 +62,8 @@ import { TasksComponent } from './tasks/tasks.component';
     TaskService,
     ProductService,
     RequestService,
-    RequestProductService
+    RequestProductService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })

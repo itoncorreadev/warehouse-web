@@ -94,7 +94,9 @@ export class TaskService{
         item.attributes.description,
         item.attributes.done,
         item.attributes['deadline-to-br'],
-        item.attributes['done-description']
+        item.attributes['done-description'],
+        item.attributes.user.name,
+        item.attributes['user-id']
       )
 
       tasks.push(task)
@@ -110,7 +112,9 @@ export class TaskService{
       response.json().data.attributes.description,
       response.json().data.attributes.done,
       response.json().data.attributes['deadline-to-br'],
-      response.json().data.attributes['done-description']
+      response.json().data.attributes['done-description'],
+      response.json().data.attributes.user.name,
+      response.json().data.attributes['user-id']
     )
   }
 }

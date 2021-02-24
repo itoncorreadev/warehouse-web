@@ -1,4 +1,6 @@
-<h4 class="page-header">Produto: {{ product.name }}</h4>
+<div class="page-header">
+  <button type="button" class="btn btn-default" (click)="goBack()"><span class="glyphicon glyphicon-chevron-left"></span> Voltar</button>
+</div>
 
 <form [formGroup]="form" (ngSubmit)="updateProduct()">
   <div class="row">
@@ -109,6 +111,5 @@
       <textarea formControlName="description" id="description" class="form-control" rows="4"></textarea>
     </div>
   </div>
-  <button [disabled]="form.invalid" type="submit" class="btn btn-success">Salvar</button>&nbsp;
-  <button type="button" class="btn btn-default" (click)="goBack()">Voltar</button>
+  <button [disabled]="form.invalid" type="submit" class="btn btn-primary">Salvar</button>
 </form>
