@@ -35,6 +35,7 @@
         </tr>
       </thead>
       <tbody>
+        <span *ngIf="requests == ''" class="msg-table">Não existe requisição cadastrada!</span>
         <tr *ngFor="let request of requests | paginate: { itemsPerPage: 5, currentPage: paginaAtual}; let i = index" [ngClass]="colorClassForInOut(request.request_type)" [routerLink]="['/requests', request.id]">
           <td>{{ request.id }}</td>
           <td>{{ request.description }}</td>
@@ -57,7 +58,7 @@
       </tbody>
     </table>
   </div>
-  <div class="text-center">
+  <div class="pagination">
     <pagination-controls (pageChange)="paginaAtual = $event" previousLabel="Anterior" nextLabel="Próximo" responsive="true"></pagination-controls>
   </div>
 </div>

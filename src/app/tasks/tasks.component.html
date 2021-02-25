@@ -30,16 +30,17 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let task of tasks | paginate: { itemsPerPage: 5, currentPage: paginaAtual}; let i = index" [ngClass]="colorClassForStatusTask(task.done_description)" [routerLink]="['/tasks',task.id]">
+        <span *ngIf="tasks == ''" class="msg-table">Não existe tarefa cadastrada!</span>
+        <tr *ngFor="let task of tasks | paginate: { itemsPerPage: 5, currentPage: paginaAtual}; let i = index" [ngClass]="colorClassForStatusTask(task.done_description)">
           <td>{{ task.id }}</td>
           <td>{{ task.title }}</td>
           <td>{{ task.deadline }}</td>
           <td>{{ task.done_description }}</td>
           <td>{{ task.name }}</td>
           <td>
-            <!-- <a [routerLink]="['/tasks',task.id]" class="btn btn-primary">
+            <a [routerLink]="['/tasks',task.id]" class="btn btn-primary">
               <span class="glyphicon glyphicon-info-sign"></span>
-            </a>&nbsp; -->
+            </a>&nbsp;
             <button class="btn btn-danger" (click)="deleteTask(task)">
               <span class="glyphicon glyphicon-trash"></span>
               <!-- Excluir -->
@@ -49,7 +50,7 @@
       </tbody>
     </table>
   </div>
-  <div class="text-center">
+  <div class="pagination">
     <pagination-controls (pageChange)="paginaAtual = $event" previousLabel="Anterior" nextLabel="Próximo" responsive="true"></pagination-controls>
   </div>
 </div>

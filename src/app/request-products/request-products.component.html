@@ -45,6 +45,7 @@
         </tr>
       </thead>
       <tbody>
+        <span *ngIf="requestProducts == ''" class="msg-table">Não existe produto vinculado a essa requisição!</span>
         <tr *ngFor="let requestProduct of requestProducts | paginate: { itemsPerPage: 5, currentPage: paginaAtual}; let i = index" class="info">
           <td>{{ requestProduct.id }}</td>
           <td>{{ requestProduct.name }}</td>

@@ -1,1 +1,9 @@
 @import '~animate.css/animate.min';
+
+
+.pagination {
+  position: fixed;
+  text-align: center;
+  bottom: 0;
+  width: 100%;
+}

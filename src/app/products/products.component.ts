@@ -4,7 +4,8 @@ import { ProductService } from "./shared/product.service";
 
 @Component({
   selector: 'products',
-  templateUrl: './products.component.html'
+  templateUrl: './products.component.html',
+  styleUrls: ['../app.component.css']
 })
 
 export class ProductsComponent implements OnInit{

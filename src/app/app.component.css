@@ -22,7 +22,7 @@
 }
 
 .ngx-pagination .current,
-.btn-primary {
+.btn-default {
   background: #0a0a0a00 !important;
   border: transparent !important;
   border-radius: 20px !important;
@@ -32,4 +32,22 @@
   background: #0a0a0a00 !important;
   border-radius: 20px !important;
   border: transparent !important;
+}
+
+.pagination {
+  position: fixed;
+  text-align: center;
+  bottom: -20px;
+  width: 100%;
+}
+
+.panel {
+  height: 214px;
+}
+
+.msg-table {
+  position: fixed;
+  text-align: center;
+  bottom: 25%;
+  width: 100%;
 }

@@ -31,6 +31,7 @@
         </tr>
       </thead>
       <tbody>
+        <span *ngIf="products == ''" class="msg-table">Não existe produto cadastrado!</span>
         <tr *ngFor="let product of products | paginate: { itemsPerPage: 5, currentPage: paginaAtual}; let i = index" [ngClass]="colorClassForStatus(product.quantity_measure)" [routerLink]="['/products',product.id]">
           <td>{{ product.id }}</td>
           <td>{{ product.name }}</td>
@@ -50,7 +51,7 @@
       </tbody>
     </table>
   </div>
-  <div class="text-center">
+  <div class="pagination">
     <pagination-controls (pageChange)="paginaAtual = $event" previousLabel="Anterior" nextLabel="Próximo" responsive="true"></pagination-controls>
   </div>
 </div>

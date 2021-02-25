@@ -4,7 +4,8 @@ import { RequestService } from "./shared/request.service";
 
 @Component({
   selector: 'requests',
-  templateUrl: './requests.component.html'
+  templateUrl: './requests.component.html',
+  styleUrls: ['../app.component.css']
 })
 
 export class RequestsComponent implements OnInit{
