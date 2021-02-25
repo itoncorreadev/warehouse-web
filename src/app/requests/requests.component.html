@@ -35,7 +35,7 @@
         </tr>
       </thead>
       <tbody>
-        <span *ngIf="requests == ''" class="msg-table">Não existe requisição cadastrada!</span>
+        <span *ngIf="requests.length == 0" class="msg-table">Não existe requisição cadastrada!</span>
         <tr *ngFor="let request of requests | paginate: { itemsPerPage: 5, currentPage: paginaAtual}; let i = index" [ngClass]="colorClassForInOut(request.request_type)" [routerLink]="['/requests', request.id]">
           <td>{{ request.id }}</td>
           <td>{{ request.description }}</td>

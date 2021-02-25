@@ -31,7 +31,7 @@
         </tr>
       </thead>
       <tbody>
-        <span *ngIf="products == ''" class="msg-table">Não existe produto cadastrado!</span>
+        <span *ngIf="products.length == 0" class="msg-table">Não existe produto cadastrado!</span>
         <tr *ngFor="let product of products | paginate: { itemsPerPage: 5, currentPage: paginaAtual}; let i = index" [ngClass]="colorClassForStatus(product.quantity_measure)" [routerLink]="['/products',product.id]">
           <td>{{ product.id }}</td>
           <td>{{ product.name }}</td>
