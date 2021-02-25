@@ -35,16 +35,16 @@
         </tr>
       </thead>
       <tbody>
-        <span *ngIf="requests.length == 0" class="msg-table">Não existe requisição cadastrada!</span>
-        <tr *ngFor="let request of requests | paginate: { itemsPerPage: 5, currentPage: paginaAtual}; let i = index" [ngClass]="colorClassForInOut(request.request_type)" [routerLink]="['/requests', request.id]">
+        <span *ngIf="requests?.length == 0" class="msg-table">Não existe requisição cadastrada!</span>
+        <tr *ngFor="let request of requests | paginate: { itemsPerPage: 5, currentPage: paginaAtual}; let i = index" [ngClass]="colorClassForInOut(request.request_type)">
           <td>{{ request.id }}</td>
           <td>{{ request.description }}</td>
           <td><span class="glyphicon" [ngClass]="iconClassForInOut(request.request_type)"></span> {{ request.request_type }}</td>
           <td>{{ request.name }}</td>
           <td>
-            <!-- <a [routerLink]="['/requests', request.id]" class="btn btn-primary">
+            <a [routerLink]="['/requests', request.id]" class="btn btn-primary">
               <span class="glyphicon glyphicon-info-sign"></span>
-            </a>&nbsp; -->
+            </a>&nbsp;
             <a [routerLink]="['/requests', request.id, 'request-products']" class="btn btn-success">
               <span class="glyphicon glyphicon-apple"></span>
               <!-- Requisição -->

@@ -8,7 +8,8 @@ import { RequestProductService } from './shared/request-product.service';
 
 @Component({
   selector: 'request-products',
-  templateUrl: './request-products.component.html'
+  templateUrl: './request-products.component.html',
+  styleUrls: ['../app.component.css']
 })
 
 export class RequestProductsComponent implements OnInit{
@@ -32,7 +33,7 @@ export class RequestProductsComponent implements OnInit{
 
     this.requestProductService.getAll(requestId)
       .subscribe(
-        requestProduct => this.requestProducts = requestProduct.sort((a, b) => b.id - a.id),
+        requestProducts => this.requestProducts = requestProducts.sort((a, b) => b.id - a.id),
         error => alert("Ocorreu um error no servidor, tente mais tarde.")
       )
 

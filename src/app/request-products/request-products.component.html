@@ -45,7 +45,7 @@
         </tr>
       </thead>
       <tbody>
-        <span *ngIf="requestProducts.length == 0" class="msg-table">Não existe produto vinculado a essa requisição!</span>
+        <span *ngIf="requestProducts?.length == 0" class="msg-table">Não existe produto vinculado a essa requisição!</span>
         <tr *ngFor="let requestProduct of requestProducts | paginate: { itemsPerPage: 5, currentPage: paginaAtual}; let i = index" class="info">
           <td>{{ requestProduct.id }}</td>
           <td>{{ requestProduct.name }}</td>
@@ -53,10 +53,9 @@
           <td>{{ requestProduct.unit_price_br }}</td>
           <td>{{ requestProduct.calc_total_price_br }}</td>
           <td>
-            <!-- <a [routerLink]="['/requests','request.id','request-products' requestProduct.id]" class="btn btn-primary">
+            <a [routerLink]="['/requests',request.id,'request-products', requestProduct.id]" class="btn btn-primary">
               <span class="glyphicon glyphicon-info-sign"></span>
-
-            </a>&nbsp; -->
+            </a>&nbsp;
             <button class="btn btn-danger" (click)="deleteRequestProduct(requestProduct)">
               <span class="glyphicon glyphicon-trash"></span>
               <!-- Excluir -->
@@ -66,7 +65,7 @@
       </tbody>
     </table>
   </div>
-  <div class="text-center">
+  <div class="pagination">
     <pagination-controls (pageChange)="paginaAtual = $event" previousLabel="Anterior" nextLabel="Próximo" responsive="true"></pagination-controls>
   </div>
 </div>

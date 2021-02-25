@@ -31,17 +31,17 @@
         </tr>
       </thead>
       <tbody>
-        <span *ngIf="products.length == 0" class="msg-table">Não existe produto cadastrado!</span>
-        <tr *ngFor="let product of products | paginate: { itemsPerPage: 5, currentPage: paginaAtual}; let i = index" [ngClass]="colorClassForStatus(product.quantity_measure)" [routerLink]="['/products',product.id]">
+        <span *ngIf="products?.length == 0" class="msg-table">Não existe produto cadastrado!</span>
+        <tr *ngFor="let product of products | paginate: { itemsPerPage: 5, currentPage: paginaAtual}; let i = index" [ngClass]="colorClassForStatus(product.quantity_measure)">
           <td>{{ product.id }}</td>
           <td>{{ product.name }}</td>
           <td>{{ product.quantity_in }} {{ product.measure}}</td>
           <td>{{ product.quantity_out }} {{ product.measure}}</td>
           <td>{{ product.quantity_inventory }} {{ product.measure}}</td>
           <td>
-            <!-- <a [routerLink]="['/products',product.id]" class="btn btn-primary">
+            <a [routerLink]="['/products',product.id]" class="btn btn-primary">
               <span class="glyphicon glyphicon-info-sign"></span>
-            </a>&nbsp; -->
+            </a>&nbsp;
             <button class="btn btn-danger" (click)="deleteProduct(product)">
               <span class="glyphicon glyphicon-trash"></span>
               <!-- Excluir -->

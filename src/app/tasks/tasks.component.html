@@ -30,7 +30,7 @@
         </tr>
       </thead>
       <tbody>
-        <span *ngIf="tasks.length == 0" class="msg-table">Não existe tarefa cadastrada!</span>
+        <span *ngIf="tasks?.length == 0" class="msg-table">Não existe tarefa cadastrada!</span>
         <tr *ngFor="let task of tasks | paginate: { itemsPerPage: 5, currentPage: paginaAtual}; let i = index" [ngClass]="colorClassForStatusTask(task.done_description)">
           <td>{{ task.id }}</td>
           <td>{{ task.title }}</td>
