@@ -96,7 +96,8 @@ export class RequestService{
         item.attributes['document-type'],
         item.attributes['document-code'],
         item.attributes.status,
-        item.attributes.user.name
+        item.attributes.user.name,
+        item.attributes['status-description']
       )
 
       requests.push(request)
@@ -114,7 +115,8 @@ export class RequestService{
       response.json().data.attributes['document-type'],
       response.json().data.attributes['document-code'],
       response.json().data.attributes.status,
-      response.json().data.attributes.user.name
+      response.json().data.attributes.user.name,
+      response.json().data.attributes['status-description']
     )
   }
 

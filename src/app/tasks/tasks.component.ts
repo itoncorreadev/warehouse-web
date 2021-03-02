@@ -55,10 +55,17 @@ export class TasksComponent implements OnInit{
     }
   }
 
-  public colorClassForStatusTask(fieldName: string){
+  public colorClassForStatusTask(fieldName: boolean){
     return {
-      "success": fieldName == "Feita",
-      "danger": fieldName == "Pendente"
+      "success": fieldName == true,
+      "danger": fieldName == false
+    }
+  }
+
+  public labelClassForStatusTask(fieldName: boolean){
+    return {
+      "label-success": fieldName == true,
+      "label-danger animate__bounce animate__infinite": fieldName == false
     }
   }
 }

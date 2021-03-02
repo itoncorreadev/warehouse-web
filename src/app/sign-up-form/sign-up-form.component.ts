@@ -30,7 +30,7 @@ export class SignUpFormComponent{
       .subscribe(
         () => {
           alert('Parabéns, sua conta foi criada com sucesso');
-          this.router.navigate(['/dashboard']);
+          this.router.navigate(['/']);
           this.formErrors = null;
         },
         (error) => {

@@ -53,25 +53,31 @@ export class DashboardComponent implements OnInit{
     }
   }
 
-  public colorClassForInOut(fieldName: string){
+  public colorClassForStatusTask(fieldName: boolean){
     return {
-      "success": fieldName == "in",
-      "danger": fieldName == "out",
-      "warning": fieldName == "devolution"
+      "success": fieldName == true,
+      "danger": fieldName == false
     }
   }
 
-  public colorClassForStatusTask(fieldName: string){
+  public colorClassForStatusRequest(fieldName: boolean){
     return {
-      "success": fieldName == "Feita",
-      "danger": fieldName == "Pendente"
+      "success": fieldName == true,
+      "danger": fieldName == false
     }
   }
 
-  public labelClassForStatusTask(fieldName: string){
+  public labelClassForStatusTask(fieldName: boolean){
     return {
-      "label-success": fieldName == "Feita",
-      "label-danger animate__bounce animate__infinite": fieldName == "Pendente"
+      "label-success": fieldName == true,
+      "label-danger animate__bounce animate__infinite": fieldName == false
+    }
+  }
+
+  public labelClassForStatusRequest(fieldName: boolean){
+    return {
+      "label-success": fieldName == true,
+      "label-danger animate__bounce animate__infinite": fieldName == false
     }
   }
 

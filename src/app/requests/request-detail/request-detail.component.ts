@@ -39,8 +39,8 @@ export class RequestDetailComponent implements OnInit{
     ];
 
     this.requestStatusOptions = [
-      { value: true, text: "Ativo"},
-      { value: false, text: "Inativo"}
+      { value: true, text: "Concluída"},
+      { value: false, text: "Pendente"}
     ];
 
     this.form = this.formBuilder.group({

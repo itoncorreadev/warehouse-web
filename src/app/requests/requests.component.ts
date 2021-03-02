@@ -76,11 +76,17 @@ export class RequestsComponent implements OnInit{
     }
   }
 
-  public colorClassForInOut(fieldName: string){
+  public colorClassForStatus(fieldName: boolean){
     return {
-      "success": fieldName == "in",
-      "danger": fieldName == "out",
-      "warning": fieldName == "devolution"
+      "success": fieldName == true,
+      "danger": fieldName == false
+    }
+  }
+
+  public labelClassForStatusRequest(fieldName: boolean){
+    return {
+      "label-success": fieldName == true,
+      "label-danger animate__bounce animate__infinite": fieldName == false
     }
   }
 

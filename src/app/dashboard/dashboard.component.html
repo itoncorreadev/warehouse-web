@@ -14,9 +14,9 @@
           </thead>
           <tbody>
             <span *ngIf="tasks?.length == 0" class="msg-table">Não existe tarefa cadastrada!</span>
-            <tr *ngFor="let task of tasks | paginate: {  id: 'taskPage', itemsPerPage: 3, currentPage: paginaAtualTask}; let t = index" [ngClass]="colorClassForStatusTask(task.done_description)" [routerLink]="['/tasks', task.id]">
+            <tr *ngFor="let task of tasks | paginate: {  id: 'taskPage', itemsPerPage: 3, currentPage: paginaAtualTask}; let t = index" [ngClass]="colorClassForStatusTask(task.done)" [routerLink]="['/tasks', task.id]">
               <td class="col-xs-7">{{ task.title }}</td>
-              <td><span class="label" [ngClass]="labelClassForStatusTask(task.done_description)">{{ task.done_description }}</span></td>
+              <td><span class="label" [ngClass]="labelClassForStatusTask(task.done)">{{ task.done_description }}</span></td>
               <!-- <td  class="text-right">
                 <a [routerLink]="['/tasks', task.id]" class="btn btn-primary">
                   <span class="glyphicon glyphicon-info-sign"></span>
@@ -75,17 +75,19 @@
             <tr>
               <th>Requisições</th>
               <th>Tipo</th>
+              <th>Status</th>
               <th>Name</th>
             </tr>
           </thead>
           <tbody>
             <span *ngIf="requests?.length == 0" class="msg-table">Não existe requisição cadastrada!</span>
-            <tr *ngFor="let request of requests | paginate: {  id: 'requestPage', itemsPerPage: 3, currentPage: paginaAtualRequest}; let r = index" [ngClass]="colorClassForInOut(request.request_type)" [routerLink]="['/requests', request.id]">
+            <tr *ngFor="let request of requests | paginate: {  id: 'requestPage', itemsPerPage: 3, currentPage: paginaAtualRequest}; let r = index" [ngClass]="colorClassForStatusRequest(request.status)" [routerLink]="['/requests', request.id]">
               <td>{{ request.description }}</td>
               <td>
                 <span class="glyphicon" [ngClass]="iconClassForInOut(request.request_type)"></span>
                  {{ request.request_type }}
               </td>
+              <td><span class="label" [ngClass]="labelClassForStatusRequest(request.status)">{{ request.status_description }}</span></td>
               <td>{{ request.name }}</td>
               <!-- <td  class="text-right">
                 <a [routerLink]="['/requests', request.id]" class="btn btn-primary">

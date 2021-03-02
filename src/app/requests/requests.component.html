@@ -44,15 +44,17 @@
           <th>ID</th>
           <th>Descrição</th>
           <th>Tipo</th>
+          <th>Status</th>
           <th>Usuário</th>
         </tr>
       </thead>
       <tbody>
         <span *ngIf="requests?.length == 0" class="msg-table">Não existe requisição cadastrada!</span>
-        <tr *ngFor="let request of requests | paginate: { itemsPerPage: 5, currentPage: paginaAtual}; let i = index" [ngClass]="colorClassForInOut(request.request_type)">
+        <tr *ngFor="let request of requests | paginate: { itemsPerPage: 5, currentPage: paginaAtual}; let i = index" [ngClass]="colorClassForStatus(request.status)">
           <td>{{ request.id }}</td>
           <td>{{ request.description }}</td>
           <td><span class="glyphicon" [ngClass]="iconClassForInOut(request.request_type)"></span> {{ request.request_type }}</td>
+          <td><span class="label" [ngClass]="labelClassForStatusRequest(request.status)">{{ request.status_description }}</span></td>
           <td>{{ request.name }}</td>
           <td>
             <a [routerLink]="['/requests', request.id]" class="btn btn-primary">

@@ -43,11 +43,11 @@
       </thead>
       <tbody>
         <span *ngIf="tasks?.length == 0" class="msg-table">Não existe tarefa cadastrada!</span>
-        <tr *ngFor="let task of tasks | paginate: { itemsPerPage: 5, currentPage: paginaAtual}; let i = index" [ngClass]="colorClassForStatusTask(task.done_description)">
+        <tr *ngFor="let task of tasks | paginate: { itemsPerPage: 5, currentPage: paginaAtual}; let i = index" [ngClass]="colorClassForStatusTask(task.done)">
           <td>{{ task.id }}</td>
           <td>{{ task.title }}</td>
           <td>{{ task.deadline }}</td>
-          <td>{{ task.done_description }}</td>
+          <td><span class="label" [ngClass]="labelClassForStatusTask(task.done)">{{ task.done_description }}</span></td>
           <td>{{ task.name }}</td>
           <td>
             <a [routerLink]="['/tasks',task.id]" class="btn btn-primary">

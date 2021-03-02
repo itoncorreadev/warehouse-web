@@ -7,6 +7,7 @@ export class Request {
     public document_type?: string,
     public document_code?: string,
     public status?: boolean,
-    public name?: string
+    public name?: string,
+    public status_description?: string,
   ){}
 }
