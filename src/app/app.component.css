@@ -41,6 +41,13 @@
   width: 100%;
 }
 
+.pagination-table {
+  position: fixed;
+  text-align: center;
+  bottom: -170px;
+  width: 100%;
+}
+
 .panel {
   height: 214px;
 }

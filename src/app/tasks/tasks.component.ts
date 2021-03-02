@@ -12,6 +12,7 @@ export class TasksComponent implements OnInit{
   public tasks: Array<Task> ;
   public newTask: Task;
   public paginaAtual = 1;
+  public errorText = '';
 
   public constructor(private taskService: TaskService){
     this.newTask = new Task(null, '');
@@ -21,15 +22,16 @@ export class TasksComponent implements OnInit{
     this.taskService.getAll()
       .subscribe(
         tasks => this.tasks = tasks.sort((a, b) => b.id - a.id),
-        error => alert("Ocorreu um error no servidor, tente mais tarde.")
+        error => this.errorText = "Ocorreu um error no servidor, tente mais tarde."
       )
   }
 
   public createTask(){
+    this.errorText='';
     this.newTask.title = this.newTask.title.trim();
 
     if(!this.newTask.title){
-      alert("A tarefa deve ter um título!")
+      this.errorText = "A tarefa deve ter um título!";
     } else {
       console.log(this.newTask);
       this.taskService.create(this.newTask)
@@ -38,7 +40,7 @@ export class TasksComponent implements OnInit{
             this.tasks.unshift(task);
             this.newTask = new Task(null, '');
           },
-          () => alert("Ocorreu um erro no servidor, tente mais tarde!")
+          () => this.errorText = "Ocorreu um erro no servidor, tente mais tarde!"
         )
     }
   }

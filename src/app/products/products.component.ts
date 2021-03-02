@@ -12,6 +12,7 @@ export class ProductsComponent implements OnInit{
   public products: Array<Product>;
   public newProduct: Product;
   public paginaAtual = 1;
+  public errorText = '';
 
   public constructor(private productService: ProductService){
     this.newProduct = new Product(null, '');
@@ -21,15 +22,16 @@ export class ProductsComponent implements OnInit{
     this.productService.getAll()
       .subscribe(
         products => this.products = products.sort((a, b) => b.id - a.id),
-        error => alert("Ocorreu um error no servidor, tente mais tarde.")
+        error => this.errorText = "Ocorreu um error no servidor, tente mais tarde."
       )
   }
 
   public createProduct(){
+    this.errorText = '';
     this.newProduct.name = this.newProduct.name.trim();
 
     if(!this.newProduct.name){
-      alert("O produto deve ter um nome!")
+      this.errorText = "O produto deve ter um nome!";
     } else {
       this.productService.create(this.newProduct)
         .subscribe(
@@ -37,7 +39,7 @@ export class ProductsComponent implements OnInit{
             this.products.unshift(product);
             this.newProduct = new Product(null, '');
           },
-          () => alert("Ocorreu um erro no servidor, tente mais tarde!")
+          () => this.errorText = "Ocorreu um erro no servidor, tente mais tarde!"
         )
     }
   }

@@ -1,6 +1,18 @@
 <h4 class="page-header">Lista de Produtos</h4>
 
 <div class="well">
+
+  <div  *ngIf="errorText" class="alert alert-danger">
+    <strong>
+      <span class="glyphicon glyphicon-warning-sign"></span>
+      Ocorreu um erro ao tentar adicionar um produto no sistema.
+    </strong>
+
+    <ul>
+      <li>{{ errorText }}</li>
+    </ul>
+  </div>
+
   <form (ngSubmit)="createProduct()">
     <div class="row">
       <div class="col-lg-12">
@@ -51,7 +63,7 @@
       </tbody>
     </table>
   </div>
-  <div class="pagination">
+  <div class="pagination-table">
     <pagination-controls (pageChange)="paginaAtual = $event" previousLabel="Anterior" nextLabel="Próximo" responsive="true"></pagination-controls>
   </div>
 </div>

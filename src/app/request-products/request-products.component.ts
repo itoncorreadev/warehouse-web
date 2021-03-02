@@ -17,6 +17,7 @@ export class RequestProductsComponent implements OnInit{
   public requestProducts: Array<RequestProduct>;
   public newRequestProduct: RequestProduct;
   public paginaAtual = 1;
+  public errors = [];
 
   public constructor(
     private requestProductService: RequestProductService,
@@ -34,31 +35,36 @@ export class RequestProductsComponent implements OnInit{
     this.requestProductService.getAll(requestId)
       .subscribe(
         requestProducts => this.requestProducts = requestProducts.sort((a, b) => b.id - a.id),
-        error => alert("Ocorreu um error no servidor, tente mais tarde.")
+        error => this.errors.push("Ocorreu um error no servidor, tente mais tarde.")
       )
 
       this.productService.getAll()
       .subscribe(
         products => this.products = products.sort((a, b) => b.id - a.id),
-        error => alert("Ocorreu um error no servidor, tente mais tarde.")
+        error => this.errors.push("Ocorreu um error no servidor, tente mais tarde.")
       )
   }
 
 
   public createRequestProduct(){
-    this.newRequestProduct.quantity = this.newRequestProduct.quantity;
 
-    if(!this.newRequestProduct.quantity){
-      alert("Adicione a quantidade do produto!")
+    this.errors= [];
+
+    if(!this.newRequestProduct.product_id || !this.newRequestProduct.quantity || !this.newRequestProduct.unit_price){
+      if(!this.newRequestProduct.product_id)
+      this.errors.push("Selecione um produto válido.");
+      if(!this.newRequestProduct.quantity)
+      this.errors.push("Adicione a quantidade do produto selecionado.");
+      if(!this.newRequestProduct.unit_price)
+      this.errors.push("Adicione o valor do produto selecionado.");
     } else {
-      console.log(this.newRequestProduct);
       this.requestProductService.create(this.newRequestProduct)
         .subscribe(
           requestProduct => {
             this.requestProducts.unshift(requestProduct);
             this.newRequestProduct = new RequestProduct(null, null, '', null);
           },
-          () => alert("Ocorreu um erro no servidor, tente mais tarde!")
+          () => this.errors.push("Ocorreu um erro no servidor, tente mais tarde!")
         )
     }
   }

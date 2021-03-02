@@ -13,7 +13,7 @@ export class RequestsComponent implements OnInit{
   public newRequest: Request;
   public requestTypeOptions: Array<any>;
   public paginaAtual = 1;
-  public errorText = '';
+  public errors = [];
 
   public constructor(private requestService: RequestService){
     this.newRequest = new Request(null, '', '', '');
@@ -31,30 +31,30 @@ export class RequestsComponent implements OnInit{
     this.requestService.getAll()
       .subscribe(
         requests => this.requests = requests.sort((a, b) => b.id - a.id),
-        error => alert("Ocorreu um error no servidor, tente mais tarde.")
+        error => this.errors.push("Ocorreu um error no servidor, tente mais tarde.")
       )
   }
 
   public createRequest(){
+    this.errors = [];
     this.newRequest.request_type = this.newRequest.request_type.trim();
     this.newRequest.description = this.newRequest.description.trim();
 
-    if(!this.newRequest.request_type){
-      this.errorText = "A requisição deve ter um tipo!";
+    if(!this.newRequest.request_type || !this.newRequest.description) {
+      if (!this.newRequest.request_type)
+      this.errors.push("A requisição deve ter um tipo!");
+      if(!this.newRequest.description)
+        this.errors.push("A requisição deve ter uma descrição!");
     } else {
-      if(!this.newRequest.description){
-        this.errorText = "A requisição deve ter uma descrição!";
-      } else {
-        console.log(this.newRequest);
-        this.requestService.create(this.newRequest)
-          .subscribe(
-            request => {
-              this.requests.unshift(request);
-              this.newRequest = new Request(null, '', '', '');
-            },
-            () => alert("Ocorreu um erro no servidor, tente mais tarde!")
-          )
-      }
+      console.log(this.newRequest);
+      this.requestService.create(this.newRequest)
+        .subscribe(
+          request => {
+            this.requests.unshift(request);
+            this.newRequest = new Request(null, '', '', '');
+          },
+          () => this.errors.push("Ocorreu um erro no servidor, tente mais tarde!")
+        )
     }
   }
 

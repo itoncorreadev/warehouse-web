@@ -24,8 +24,6 @@ export class AuthService{
       password: password
     }
 
-    console.log(signInData);
-
     return this.tokenService.signIn(signInData).pipe(
       catchError(this.handleErrors)
     )

@@ -1,6 +1,19 @@
 <h4 class="page-header">Lista de Requisições</h4>
 
 <div class="well">
+
+  <div  *ngIf="errors?.length > 0" class="alert alert-danger">
+    <strong>
+      <span class="glyphicon glyphicon-warning-sign"></span>
+      Ocorreu um erro ao tentar adicionar uma requisição no sistema.
+    </strong>
+
+    <ul>
+      <li *ngFor="let error of errors">{{ error }}</li>
+    </ul>
+  </div>
+
+
   <form (ngSubmit)="createRequest()">
     <div class="row">
 
@@ -58,7 +71,7 @@
       </tbody>
     </table>
   </div>
-  <div class="pagination">
+  <div class="pagination-table">
     <pagination-controls (pageChange)="paginaAtual = $event" previousLabel="Anterior" nextLabel="Próximo" responsive="true"></pagination-controls>
   </div>
 </div>

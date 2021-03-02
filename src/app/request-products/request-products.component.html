@@ -7,6 +7,18 @@
 
 
 <div class="well">
+
+  <div  *ngIf="errors?.length" class="alert alert-danger">
+    <strong>
+      <span class="glyphicon glyphicon-warning-sign"></span>
+      Ocorreu um erro ao tentar adicionar um produto nesta requisição.
+    </strong>
+
+    <ul>
+      <li *ngFor="let error of errors">{{ error }}</li>
+    </ul>
+  </div>
+
   <form (ngSubmit)="createRequestProduct()">
     <div class="row">
       <div class="form-group col-md-4 has-feedback">
@@ -53,9 +65,9 @@
           <td>{{ requestProduct.unit_price_br }}</td>
           <td>{{ requestProduct.calc_total_price_br }}</td>
           <td>
-            <a [routerLink]="['/requests',request.id,'request-products', requestProduct.id]" class="btn btn-primary">
+            <!-- <a [routerLink]="['/requests',request.id,'request-products', requestProduct.id]" class="btn btn-primary">
               <span class="glyphicon glyphicon-info-sign"></span>
-            </a>&nbsp;
+            </a>&nbsp; -->
             <button class="btn btn-danger" (click)="deleteRequestProduct(requestProduct)">
               <span class="glyphicon glyphicon-trash"></span>
               <!-- Excluir -->
@@ -65,7 +77,7 @@
       </tbody>
     </table>
   </div>
-  <div class="pagination">
+  <div class="pagination-table">
     <pagination-controls (pageChange)="paginaAtual = $event" previousLabel="Anterior" nextLabel="Próximo" responsive="true"></pagination-controls>
   </div>
 </div>
