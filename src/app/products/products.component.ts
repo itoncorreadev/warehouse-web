@@ -63,4 +63,13 @@ export class ProductsComponent implements OnInit{
     }
   }
 
+  public labelClassForStatus(fieldName: string){
+    return {
+      "label-success": fieldName == "success",
+      "label-warning": fieldName == "warning",
+      "label-danger": fieldName == "danger",
+      "label-info": fieldName == "info"
+    }
+  }
+
 }

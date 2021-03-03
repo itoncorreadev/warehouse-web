@@ -18,6 +18,7 @@ export class RequestProductsComponent implements OnInit{
   public newRequestProduct: RequestProduct;
   public paginaAtual = 1;
   public errors = [];
+  public requestId: string;
 
   public constructor(
     private requestProductService: RequestProductService,
@@ -30,9 +31,9 @@ export class RequestProductsComponent implements OnInit{
 
   public ngOnInit(){
 
-    const requestId = this.activatedRoute.snapshot.params['request_id'];
+    this.requestId = this.activatedRoute.snapshot.params['request_id'];
 
-    this.requestProductService.getAll(requestId)
+    this.requestProductService.getAll(this.requestId)
       .subscribe(
         requestProducts => this.requestProducts = requestProducts.sort((a, b) => b.id - a.id),
         error => this.errors.push("Ocorreu um error no servidor, tente mais tarde.")

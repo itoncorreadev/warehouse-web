@@ -65,9 +65,9 @@
           <td>{{ requestProduct.unit_price_br }}</td>
           <td>{{ requestProduct.calc_total_price_br }}</td>
           <td>
-            <!-- <a [routerLink]="['/requests',request.id,'request-products', requestProduct.id]" class="btn btn-primary">
+            <a [routerLink]="['/requests',this.activatedRoute.snapshot.params['request_id'],'request-products', requestProduct.id]" class="btn btn-primary">
               <span class="glyphicon glyphicon-info-sign"></span>
-            </a>&nbsp; -->
+            </a>&nbsp;
             <button class="btn btn-danger" (click)="deleteRequestProduct(requestProduct)">
               <span class="glyphicon glyphicon-trash"></span>
               <!-- Excluir -->

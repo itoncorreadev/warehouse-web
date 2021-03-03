@@ -101,7 +101,8 @@ export class ProductService{
         item.attributes['quantity-in'],
         item.attributes['quantity-out'],
         item.attributes['quantity-inventory'],
-        item.attributes['quantity-measure']
+        item.attributes['quantity-measure'],
+        item.attributes['quantity-description']
       )
       products.push(product)
     })
@@ -125,7 +126,7 @@ export class ProductService{
       response.json().data.attributes['quantity-in'],
       response.json().data.attributes['quantity-out'],
       response.json().data.attributes['quantity-inventory'],
-      response.json().data.attributes['quantity-measure']
+      response.json().data.attributes['quantity-description']
     )
   }
 }

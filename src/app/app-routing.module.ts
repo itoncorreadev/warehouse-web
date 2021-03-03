@@ -5,6 +5,7 @@ import { AuthGuard } from "./guards/auth.guard";
 import { NotAuthenticatedGuard } from "./guards/not-authenticated.guard";
 import { ProductDetailComponent } from "./products/product-detail/product-detail.component";
 import { ProductsComponent } from './products/products.component';
+import { RequestProductDetailComponent } from "./request-products/request-product-detail/request-product-detail.component";
 import { RequestProductsComponent } from './request-products/request-products.component';
 import { RequestDetailComponent } from "./requests/request-detail/request-detail.component";
 import { RequestsComponent } from "./requests/requests.component";
@@ -24,7 +25,7 @@ const ROUTES = RouterModule.forRoot([
   { path: 'requests', component: RequestsComponent, canActivate: [AuthGuard] },
   { path: 'requests/:id', component: RequestDetailComponent, canActivate: [AuthGuard] },
   { path: 'requests/:request_id/request-products', component: RequestProductsComponent, canActivate: [AuthGuard] },
-  { path: 'requests/:request_id/request-products/:id', component: RequestProductsComponent, canActivate: [AuthGuard] },
+  { path: 'requests/:request_id/request-products/:id', component: RequestProductDetailComponent, canActivate: [AuthGuard] },
   { path: '', redirectTo: '/dashboard', pathMatch: 'full' }
 ])
 

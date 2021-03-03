@@ -14,6 +14,7 @@ export class Product {
     public quantity_in?: number,
     public quantity_out?: number,
     public quantity_inventory?: number,
-    public quantity_measure?: string
+    public quantity_measure?: string,
+    public quantity_description?: string
   ){}
 }

@@ -40,6 +40,7 @@
           <th>Qtd. Entrada</th>
           <th>Qtd. Saída</th>
           <th>Qtd. Estoque</th>
+          <th>Status</th>
         </tr>
       </thead>
       <tbody>
@@ -50,6 +51,7 @@
           <td>{{ product.quantity_in }} {{ product.measure}}</td>
           <td>{{ product.quantity_out }} {{ product.measure}}</td>
           <td>{{ product.quantity_inventory }} {{ product.measure}}</td>
+          <td><span class="label" [ngClass]="labelClassForStatus(product.quantity_measure)">{{ product.quantity_description }}</span></td>
           <td>
             <a [routerLink]="['/products',product.id]" class="btn btn-primary">
               <span class="glyphicon glyphicon-info-sign"></span>

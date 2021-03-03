@@ -53,37 +53,23 @@ export class DashboardComponent implements OnInit{
     }
   }
 
-  public colorClassForStatusTask(fieldName: boolean){
+  public colorClassForStatus(fieldName: boolean){
     return {
       "success": fieldName == true,
-      "danger": fieldName == false
+      "danger animate__animated animate__pulse animate__infinite animate__slow": fieldName == false
     }
   }
 
-  public colorClassForStatusRequest(fieldName: boolean){
+  public labelClassForStatus(fieldName: boolean){
     return {
-      "success": fieldName == true,
-      "danger": fieldName == false
+      "label label-success": fieldName == true,
+      "label label-danger": fieldName == false
     }
   }
 
-  public labelClassForStatusTask(fieldName: boolean){
+  public animatedClassForStatus(fieldName: boolean){
     return {
-      "label-success": fieldName == true,
-      "label-danger animate__bounce animate__infinite": fieldName == false
-    }
-  }
-
-  public labelClassForStatusRequest(fieldName: boolean){
-    return {
-      "label-success": fieldName == true,
-      "label-danger animate__bounce animate__infinite": fieldName == false
-    }
-  }
-
-  public animatedClassForStatusTask(fieldName: string){
-    return {
-      "animate__bounce animate__infinite": fieldName == "Pendente"
+      "animate__animated animate__bounceIn animate__repeat-2": fieldName == false
     }
   }
 
@@ -91,9 +77,19 @@ export class DashboardComponent implements OnInit{
     return {
       "success": fieldName == "success",
       "warning": fieldName == "warning",
-      "danger": fieldName == "danger",
+      "animate__animated animate__pulse animate__infinite animate__slow danger": fieldName == "danger",
       "info": fieldName == "info"
     }
   }
+
+  public labelClassForStatusProduct(fieldName: string){
+    return {
+      "label-success": fieldName == "success",
+      "label-warning": fieldName == "warning",
+      "label-danger": fieldName == "danger",
+      "label-info": fieldName == "info"
+    }
+  }
+
 
 }

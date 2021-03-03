@@ -1,0 +1,40 @@
+<div class="page-header">
+  <button type="button" class="btn btn-default" (click)="goBack()"><span class="glyphicon glyphicon-chevron-left"></span> Voltar</button>
+</div>
+
+<form [formGroup]="form" (ngSubmit)="updateRequestProduct()">
+  <div class="row">
+
+
+    <!-- quantity -->
+    <div class="form-group col-md-4 has-feedback" [ngClass]="formUtils.fieldClassForErrorOrSuccess('quantity')">
+      <label for="quantity" class="control-label">Quantidade</label>
+      <input type="text" formControlName="quantity" id="quantity" class="form-control">
+      <span class="glyphicon form-control-feedback" [ngClass]="formUtils.iconClassForErrorOrSuccess('quantity')"></span>
+
+      <div *ngIf="formUtils.showFieldError('quantity')" class="text-danger">O prazo é obrigatório</div>
+    </div>
+
+    <!-- unit_price -->
+    <div class="form-group col-md-4 has-feedback" [ngClass]="formUtils.fieldClassForErrorOrSuccess('unit_price')">
+      <label for="unit_price" class="control-label">Preço Unitário</label>
+      <input type="text" formControlName="unit_price" id="unit_price" class="form-control">
+      <span class="glyphicon form-control-feedback" [ngClass]="formUtils.iconClassForErrorOrSuccess('unit_price')"></span>
+
+      <div *ngIf="formUtils.showFieldError('unit_price')" class="text-danger">O prazo é obrigatório</div>
+    </div>
+
+
+    <!-- Product -->
+    <div class="form-group col-md-4 has-feedback" [ngClass]="formUtils.fieldClassForErrorOrSuccess('product_id')">
+      <label for="product_id" class="control-label">Produto</label>
+      <select id="product_id" class="form-control" formControlName="product_id">
+        <option *ngFor="let product of products" [value]="product.id">{{ product.name }}</option>
+      </select>
+      <span class="glyphicon form-control-feedback" [ngClass]="formUtils.iconClassForErrorOrSuccess('product_id')"></span>
+
+      <div *ngIf="formUtils.showFieldError('product_id')" class="text-danger">O tipo é obrigatório</div>
+    </div>
+  </div>
+  <button [disabled]="form.invalid" type="submit" class="btn btn-primary">Salvar</button>
+</form>

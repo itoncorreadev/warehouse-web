@@ -14,6 +14,7 @@ import { TaskSearchComponent } from "./navbar/task-search/task-search.component"
 import { ProductDetailComponent } from "./products/product-detail/product-detail.component";
 import { ProductsComponent } from "./products/products.component";
 import { ProductService } from "./products/shared/product.service";
+import { RequestProductDetailComponent } from "./request-products/request-product-detail/request-product-detail.component";
 import { RequestProductsComponent } from "./request-products/request-products.component";
 import { RequestProductService } from "./request-products/shared/request-product.service";
 import { RequestDetailComponent } from "./requests/request-detail/request-detail.component";
@@ -43,7 +44,8 @@ import { TasksComponent } from './tasks/tasks.component';
     ProductDetailComponent,
     RequestsComponent,
     RequestDetailComponent,
-    RequestProductsComponent
+    RequestProductsComponent,
+    RequestProductDetailComponent
   ],
   imports: [
     BrowserModule,
