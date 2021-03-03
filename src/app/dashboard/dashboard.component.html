@@ -90,7 +90,7 @@
                  {{ request.request_type }}
               </td>
               <td>{{ request.name }}</td>
-              <td><span [ngClass]="labelClassForStatus(request.status)">{{ request.status_description }}</span></td>
+              <td><span class="label" [ngClass]="labelClassForStatus(request.status)">{{ request.status_description }}</span></td>
               <!-- <td  class="text-right">
                 <a [routerLink]="['/requests', request.id]" class="btn btn-primary">
                   <span class="glyphicon glyphicon-info-sign"></span>

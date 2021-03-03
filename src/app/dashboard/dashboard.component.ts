@@ -60,10 +60,10 @@ export class DashboardComponent implements OnInit{
     }
   }
 
-  public labelClassForStatus(fieldName: boolean){
+  public labelClassForStatus(fieldName: boolean): object{
     return {
-      "label label-success": fieldName == true,
-      "label label-danger": fieldName == false
+      "label-success": fieldName == true,
+      "label-danger": fieldName == false
     }
   }
 
@@ -84,10 +84,10 @@ export class DashboardComponent implements OnInit{
 
   public labelClassForStatusProduct(fieldName: string){
     return {
-      "label-success": fieldName == "success",
-      "label-warning": fieldName == "warning",
-      "label-danger": fieldName == "danger",
-      "label-info": fieldName == "info"
+      "label-success": fieldName === "success",
+      "label-warning": fieldName === "warning",
+      "label-danger": fieldName === "danger",
+      "label-info": fieldName === "info"
     }
   }
 
