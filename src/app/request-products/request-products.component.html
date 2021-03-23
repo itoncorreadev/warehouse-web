@@ -70,11 +70,23 @@
             <a [routerLink]="['/requests',this.activatedRoute.snapshot.params['request_id'],'request-products', requestProduct.id]" class="btn btn-primary">
               <span class="glyphicon glyphicon-info-sign"></span>
             </a>&nbsp;
-            <button class="btn btn-danger" (click)="deleteRequestProduct(requestProduct)">
+            <button class="btn btn-danger" (click)="openModal(template)">
               <span class="glyphicon glyphicon-trash"></span>
               <!-- Excluir -->
             </button>
           </td>
+          <!-- Start Modal -->
+          <ng-template #template>
+            <div class="modal-body text-center">
+              <p>Deseja realmente excluir o produto:</p>
+              <p>{{requestProduct.name}}</p>
+              <p>vinculado a essa requisição ?</p>
+              <p>{{requestProduct.description}}</p>
+              <button type="button" class="btn btn-default" (click)="deleteRequestProduct(requestProduct)" >Sim</button>
+              <button type="button" class="btn btn-primary" (click)="decline()" >Não</button>
+            </div>
+          </ng-template>
+          <!-- End Modal -->
         </tr>
       </tbody>
     </table>

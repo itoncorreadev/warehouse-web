@@ -54,11 +54,21 @@
             <a [routerLink]="['/tasks',task.id]" class="btn btn-primary">
               <span class="glyphicon glyphicon-info-sign"></span>
             </a>&nbsp;
-            <button class="btn btn-danger" (click)="deleteTask(task)">
+            <button class="btn btn-danger" (click)="openModal(template)">
               <span class="glyphicon glyphicon-trash"></span>
               <!-- Excluir -->
             </button>
           </td>
+          <!-- Start Modal -->
+          <ng-template #template>
+            <div class="modal-body text-center">
+              <p>Deseja realmente excluir a tarefa:</p>
+              <p>{{task.title}} ?</p>
+              <button type="button" class="btn btn-default" (click)="deleteTask(task)" >Sim</button>
+              <button type="button" class="btn btn-primary" (click)="decline()" >Não</button>
+            </div>
+          </ng-template>
+          <!-- End Modal -->
         </tr>
       </tbody>
     </table>

@@ -67,11 +67,21 @@
               <span class="glyphicon glyphicon-apple"></span>
               <!-- Requisição -->
             </a>&nbsp;
-            <button class="btn btn-danger" (click)="deleteRequest(request)">
+            <button class="btn btn-danger" (click)="openModal(template)">
               <span class="glyphicon glyphicon-trash"></span>
               <!-- Excluir -->
             </button>
           </td>
+          <!-- Start Modal -->
+          <ng-template #template>
+            <div class="modal-body text-center">
+              <p>Deseja realmente excluir a requisição:</p>
+              <p>{{request.description}} ?</p>
+              <button type="button" class="btn btn-default" (click)="deleteRequest(request)" >Sim</button>
+              <button type="button" class="btn btn-primary" (click)="decline()" >Não</button>
+            </div>
+          </ng-template>
+          <!-- End Modal -->
         </tr>
       </tbody>
     </table>

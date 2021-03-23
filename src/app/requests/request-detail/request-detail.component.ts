@@ -21,6 +21,7 @@ export class RequestDetailComponent implements OnInit{
   public requestDocumentOptions: Array<any>;
   public requestStatusOptions: Array<any>;
   public formUtils: FormUtils;
+  public msgText = '';
 
   public constructor(
     private requestService: RequestService,
@@ -97,11 +98,11 @@ export class RequestDetailComponent implements OnInit{
     this.requestService.update(this.request)
     .subscribe(
       () => {
-        alert("Requisição atualizada com sucesso!")
+        this.msgText = "Requisição atualizada com sucesso!",
         this.loaderService.hide()
       },
       () => alert("Ocorreu um erro no servidor, tente mais tarde!"),
-      () => this.goBack()
+      () => setTimeout(function(){history.back();}, 3000)
     )
   }
 }

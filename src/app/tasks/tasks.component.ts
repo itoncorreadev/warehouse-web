@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { LoaderService } from "../components/loader/loader.service";
 import { Task } from './shared/task.model';
 import { TaskService } from './shared/task.service';
@@ -14,8 +15,13 @@ export class TasksComponent implements OnInit{
   public newTask: Task;
   public paginaAtual = 1;
   public errorText = '';
+  modalRef: BsModalRef;
 
-  public constructor(private taskService: TaskService, private loaderService: LoaderService){
+  public constructor(
+    private taskService: TaskService,
+     private loaderService: LoaderService,
+     private modalService: BsModalService
+  ){
     this.newTask = new Task(null, '');
   }
 
@@ -32,14 +38,17 @@ export class TasksComponent implements OnInit{
     this.loaderService.show();
   }
 
+  public openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template, {class: 'modal-sm'})
+  }
+
   public createTask(){
-    this.loaderService.show();
     this.errorText='';
     this.newTask.title = this.newTask.title.trim();
-
     if(!this.newTask.title){
       this.errorText = "A tarefa deve ter um título!";
     } else {
+      this.loaderService.show();
       this.taskService.create(this.newTask)
         .subscribe(
           task => {
@@ -52,10 +61,9 @@ export class TasksComponent implements OnInit{
     }
   }
 
-  public deleteTask(task: Task){
+  public deleteTask(task: Task): void {
     this.loaderService.show();
-    if(confirm(`Deseja realmente excluir a tarefa "${task.title}"`)){
-      this.taskService.delete(task.id)
+    this.taskService.delete(task.id)
         .subscribe(
           () => {
             this.tasks = this.tasks.filter(t => t !== task),
@@ -63,9 +71,12 @@ export class TasksComponent implements OnInit{
           },
           () => "Ocorreu um erro no servidor, tente novamente mais tarde!"
         )
-    } else {
-      this.loaderService.hide();
-    }
+    this.modalRef.hide();
+  }
+
+  public decline(){
+    this.modalRef.hide();
+    this.loaderService.hide();
   }
 
   public colorClassForStatusTask(fieldName: boolean){

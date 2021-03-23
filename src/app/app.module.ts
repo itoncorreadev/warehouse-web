@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { BrowserModule } from '@angular/platform-browser';
+import { ModalModule } from "ngx-bootstrap/modal";
 import { NgxPaginationModule } from "ngx-pagination";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from './app.component';
@@ -57,15 +58,7 @@ import { TasksComponent } from './tasks/tasks.component';
     AppRoutingModule,
     NgxPaginationModule,
     LoaderModule,
-    // NgxLoadingModule.forRoot({
-    //   animationType: ngxLoadingAnimationTypes.wanderingCubes,
-    //     backdropBackgroundColour: 'rgba(0,0,0,0)',
-    //     backdropBorderRadius: '4px',
-    //     primaryColour: '#2752b8',
-    //     secondaryColour: '#db1f1f',
-    //     tertiaryColour: '#f0bc2e'
-    // })
-    //InMemoryWebApiModule.forRoot(InMemoryTaskDataService)
+    ModalModule.forRoot()
   ],
   providers: [
     AuthGuard,

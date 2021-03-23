@@ -1,4 +1,5 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, TemplateRef } from "@angular/core";
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { LoaderService } from "../components/loader/loader.service";
 import { Product } from './shared/product.model';
 import { ProductService } from "./shared/product.service";
@@ -14,8 +15,13 @@ export class ProductsComponent implements OnInit{
   public newProduct: Product;
   public paginaAtual = 1;
   public errorText = '';
+  public modalRef: BsModalRef;
 
-  public constructor(private productService: ProductService, private loaderService: LoaderService){
+  public constructor(
+    private productService: ProductService,
+    private loaderService: LoaderService,
+    private modalService: BsModalService
+  ){
     this.newProduct = new Product(null, '');
   }
 
@@ -32,14 +38,18 @@ export class ProductsComponent implements OnInit{
     this.loaderService.show();
   }
 
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template, {class: 'modal-sm'})
+  }
+
   public createProduct(){
-    this.loaderService.show()
     this.errorText = '';
     this.newProduct.name = this.newProduct.name.trim();
 
     if(!this.newProduct.name){
       this.errorText = "O produto deve ter um nome!";
     } else {
+      this.loaderService.show()
       this.productService.create(this.newProduct)
         .subscribe(
           product => {
@@ -52,18 +62,20 @@ export class ProductsComponent implements OnInit{
     }
   }
 
-  public deleteProduct(product: Product){
-    this.loaderService.show()
-    if(confirm(`Deseja realmente excluir o produto "${product.name}"`)){
-      this.productService.delete(product.id)
+  public deleteProduct(product: Product): void {
+    this.loaderService.show();
+    this.productService.delete(product.id)
         .subscribe(
           () => this.products = this.products.filter(t => t !== product),
           () => "Ocorreu um erro no servidor, tente novamente mais tarde!",
           () => this.loaderService.hide()
         )
-    } else {
-      this.loaderService.hide()
-    }
+    this.modalRef.hide();
+  }
+
+  public decline(){
+    this.modalRef.hide();
+    this.loaderService.hide();
   }
 
   public colorClassForStatus(fieldName: string){

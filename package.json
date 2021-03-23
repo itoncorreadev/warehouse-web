@@ -33,6 +33,7 @@
     "express": "^4.17.1",
     "jquery": "^3.2.1",
     "moment": "^2.18.1",
+    "ngx-bootstrap": "^4.3.0",
     "ngx-loading": "^3.0.1",
     "ngx-pagination": "^5.0.0",
     "rxjs": "^6.6.3",

@@ -4,6 +4,17 @@
 
 <loader></loader>
 
+<div  *ngIf="msgText" class="alert alert-success">
+  <strong>
+    <span class="glyphicon glyphicon-check"></span>
+    Sucesso!
+  </strong>
+
+  <ul>
+    <li>{{ msgText }}</li>
+  </ul>
+</div>
+
 <form [formGroup]="form" (ngSubmit)="updateRequest()">
   <div class="row">
 

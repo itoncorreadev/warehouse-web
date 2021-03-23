@@ -23,7 +23,7 @@ export class ProductDetailComponent implements OnInit{
   public productGroupOptions: Array<any>;
   public productStatusOptions: Array<any>;
   public formUtils: FormUtils;
-
+  public msgText = '';
 
   public constructor(
     private productService: ProductService,
@@ -70,7 +70,6 @@ export class ProductDetailComponent implements OnInit{
     this.formUtils = new FormUtils(this.form);
   }
 
-
   public ngOnInit(){
     this.product = new Product(null, null);
 
@@ -83,17 +82,14 @@ export class ProductDetailComponent implements OnInit{
     )
   }
 
-
   public setProduct(product: Product): void {
     this.product = product;
     this.form.patchValue(product);
   }
 
-
   public goBack(){
     this.location.back();
   }
-
 
   public updateProduct(){
     this.product.name = this.form.get('name').value;
@@ -109,9 +105,9 @@ export class ProductDetailComponent implements OnInit{
 
     this.productService.update(this.product)
     .subscribe(
-      () => alert("Produto atualizado com sucesso!"),
+      () => this.msgText = "Produto atualizado com sucesso!",
       () => alert("Ocorreu um erro no servidor, tente mais tarde!"),
-      () => this.goBack()
+      () => setTimeout(function(){history.back();}, 3000)
     )
   }
 }

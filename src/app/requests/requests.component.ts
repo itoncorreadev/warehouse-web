@@ -1,4 +1,5 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, TemplateRef } from "@angular/core";
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { LoaderService } from "../components/loader/loader.service";
 import { Request } from './shared/request.model';
 import { RequestService } from "./shared/request.service";
@@ -15,8 +16,16 @@ export class RequestsComponent implements OnInit{
   public requestTypeOptions: Array<any>;
   public paginaAtual = 1;
   public errors = [];
+  public modalRef: BsModalRef;
 
-  public constructor(private requestService: RequestService, private loaderService: LoaderService){
+  public constructor(
+
+    private requestService: RequestService,
+    private loaderService: LoaderService,
+    private modalService: BsModalService
+
+  ){
+
     this.newRequest = new Request(null, '', '', '');
 
     this.requestTypeOptions = [
@@ -26,6 +35,7 @@ export class RequestsComponent implements OnInit{
       { value: 'out', text: "Saída de Produtos"},
       { value: 'devolution', text: "Devolução"}
     ];
+
   }
 
   public ngOnInit(){
@@ -37,12 +47,15 @@ export class RequestsComponent implements OnInit{
       )
   }
 
+  public openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template, {class: 'modal-sm'})
+  }
+
   public ngAfterViewInit(){
     this.loaderService.show()
   }
 
   public createRequest(){
-    this.loaderService.show()
     this.errors = [];
     this.newRequest.request_type = this.newRequest.request_type.trim();
     this.newRequest.description = this.newRequest.description.trim();
@@ -52,9 +65,8 @@ export class RequestsComponent implements OnInit{
       this.errors.push("A requisição deve ter um tipo!");
       if(!this.newRequest.description)
         this.errors.push("A requisição deve ter uma descrição!");
-        this.loaderService.hide()
     } else {
-      console.log(this.newRequest);
+      this.loaderService.show()
       this.requestService.create(this.newRequest)
         .subscribe(
           request => {
@@ -67,18 +79,20 @@ export class RequestsComponent implements OnInit{
     }
   }
 
-  public deleteRequest(request: Request){
-    this.loaderService.show()
-    if(confirm(`Deseja realmente excluir a request "${request.description} de ${request.request_type}"`)){
-      this.requestService.delete(request.id)
+  public deleteRequest(request: Request): void {
+    this.loaderService.show();
+    this.requestService.delete(request.id)
         .subscribe(
           () => this.requests = this.requests.filter(t => t !== request),
           () => "Ocorreu um erro no servidor, tente novamente mais tarde!",
           () => this.loaderService.hide()
         )
-    } else {
-      this.loaderService.hide()
-    }
+    this.modalRef.hide();
+  }
+
+  public decline(){
+    this.modalRef.hide();
+    this.loaderService.hide();
   }
 
   public iconClassForInOut(fieldName: string){

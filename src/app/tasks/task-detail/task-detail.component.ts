@@ -3,6 +3,7 @@ import { AfterViewInit, Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, ParamMap } from "@angular/router";
 import * as datetimepicker from 'eonasdan-bootstrap-datetimepicker';
+import { BsModalService } from 'ngx-bootstrap/modal';
 import { switchMap } from "rxjs/operators";
 import { FormUtils } from "../../shared/form.utils";
 import { User } from "../../shared/user.model";
@@ -10,7 +11,6 @@ import { UserService } from "../../shared/user.service";
 import { Task } from '../shared/task.model';
 import { TaskService } from "../shared/task.service";
 window['datetimepicker'] = window['datetimepicker'] = datetimepicker;
-
 
 @Component({
   selector: 'task-detail',
@@ -23,7 +23,8 @@ export class TaskDetailComponent implements OnInit, AfterViewInit{
   public task: Task;
   public taskDoneOptions: Array<any>;
   public formUtils: FormUtils;
-  public users: Array<User>
+  public users: Array<User>;
+  public msgText = '';
 
 
   public constructor(
@@ -31,7 +32,8 @@ export class TaskDetailComponent implements OnInit, AfterViewInit{
     private route: ActivatedRoute,
     private location: Location,
     private formBuilder: FormBuilder,
-    private userService: UserService
+    private userService: UserService,
+    private modalService: BsModalService
 
   ){
     this.taskDoneOptions = [
@@ -70,6 +72,7 @@ export class TaskDetailComponent implements OnInit, AfterViewInit{
   }
 
 
+
   public setTask(task: Task): void {
     this.task = task;
     this.form.patchValue(task);
@@ -98,9 +101,11 @@ export class TaskDetailComponent implements OnInit, AfterViewInit{
 
     this.taskService.update(this.task)
     .subscribe(
-      () => alert("Tarefa atualizada com sucesso!"),
+      () => this.msgText = "Tarefa atualizada com sucesso!",
       () => alert("Ocorreu um erro no servidor, tente mais tarde!"),
-      () => this.goBack()
+      () => {
+        setTimeout(function(){history.back();}, 3000);
+      }
     )
   }
 }

@@ -1,6 +1,7 @@
 import { Location } from "@angular/common";
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, TemplateRef } from "@angular/core";
 import { ActivatedRoute } from '@angular/router';
+import { BsModalRef, BsModalService } from "ngx-bootstrap/modal";
 import { LoaderService } from "../components/loader/loader.service";
 import { Product } from "../products/shared/product.model";
 import { ProductService } from "../products/shared/product.service";
@@ -20,13 +21,15 @@ export class RequestProductsComponent implements OnInit{
   public paginaAtual = 1;
   public errors = [];
   public requestId: string;
+  public modalRef: BsModalRef;
 
   public constructor(
     private requestProductService: RequestProductService,
     private activatedRoute: ActivatedRoute,
     private productService: ProductService,
     private location: Location,
-    private locaderService: LoaderService
+    private loaderService: LoaderService,
+    private modalService: BsModalService
   ){
     this.newRequestProduct = new RequestProduct(null, null, '', null);
   }
@@ -37,23 +40,26 @@ export class RequestProductsComponent implements OnInit{
       .subscribe(
         requestProducts => this.requestProducts = requestProducts.sort((a, b) => b.id - a.id),
         error => this.errors.push("Ocorreu um error no servidor, tente mais tarde."),
-        () => this.locaderService.hide()
+        () => this.loaderService.hide()
       )
 
       this.productService.getAll()
       .subscribe(
         products => this.products = products.sort((a, b) => b.id - a.id),
         error => this.errors.push("Ocorreu um error no servidor, tente mais tarde."),
-        () => this.locaderService.hide()
+        () => this.loaderService.hide()
       )
   }
 
   public ngAfterViewInit(){
-    this.locaderService.show()
+    this.loaderService.show()
+  }
+
+  public openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template, {class: 'modal-sm'})
   }
 
   public createRequestProduct(){
-    this.locaderService.show();
     this.errors= [];
 
     if(!this.newRequestProduct.product_id || !this.newRequestProduct.quantity || !this.newRequestProduct.unit_price){
@@ -64,6 +70,7 @@ export class RequestProductsComponent implements OnInit{
       if(!this.newRequestProduct.unit_price)
       this.errors.push("Adicione o valor do produto selecionado.");
     } else {
+      this.loaderService.show();
       this.requestProductService.create(this.newRequestProduct)
         .subscribe(
           requestProduct => {
@@ -71,23 +78,25 @@ export class RequestProductsComponent implements OnInit{
             this.newRequestProduct = new RequestProduct(null, null, '', null);
           },
           () => this.errors.push("Ocorreu um erro no servidor, tente mais tarde!"),
-          () => this.locaderService.hide()
+          () => this.loaderService.hide()
         )
     }
   }
 
-  public deleteRequestProduct(requestProduct: RequestProduct){
-    this.locaderService.show();
-    if(confirm(`Deseja realmente excluir a detail "${requestProduct.observation} de ${requestProduct.observation}"`)){
-      this.requestProductService.delete(requestProduct.id)
+  public deleteRequestProduct(requestProduct: RequestProduct): void{
+    this.loaderService.show();
+    this.requestProductService.delete(requestProduct.id)
         .subscribe(
           () => this.requestProducts = this.requestProducts.filter(t => t !== requestProduct),
           () => "Ocorreu um erro no servidor, tente novamente mais tarde!",
-          () => this.locaderService.hide()
+          () => this.loaderService.hide()
         )
-    } else {
-      this.locaderService.hide();
-    }
+    this.modalRef.hide();
+  }
+
+  public decline(){
+    this.modalRef.hide();
+    this.loaderService.hide();
   }
 
   public goBack(){
