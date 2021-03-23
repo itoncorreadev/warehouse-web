@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { RequestService } from 'app/requests/shared/request.service';
 import { TableUtils } from 'app/shared/table.utils';
+import { LoaderService } from "../components/loader/loader.service";
 import { Product } from "../products/shared/product.model";
 import { ProductService } from "../products/shared/product.service";
 import { Request } from "../requests/shared/request.model";
@@ -22,27 +23,36 @@ export class DashboardComponent implements OnInit{
   public paginaAtualProduct = 1;
   public paginaAtualRequest = 1;
 
-  public constructor(private taskService: TaskService, private productService: ProductService, private requestService: RequestService){}
+  public constructor(
+    private taskService: TaskService,
+    private productService: ProductService,
+    private requestService: RequestService,
+    private loaderService: LoaderService
+  ){}
 
   public ngOnInit(){
     this.taskService.getImportant()
       .subscribe(
         tasks => this.tasks = tasks,
-        error => alert("Ocorreu um error no servidor, tente mais tarde.")
+        error => alert("Ocorreu um error no servidor, tente mais tarde."),
+        () => this.loaderService.hide()
       )
 
     this.productService.getImportant()
-        .subscribe(
-          products => this.products = products,
-          error => alert("Ocorreu um error no servidor, tente mais tarde.")
-        )
+      .subscribe(
+        products => this.products = products,
+        error => alert("Ocorreu um error no servidor, tente mais tarde.")
+      )
 
     this.requestService.getImportant()
-        .subscribe(
-          requests => this.requests = requests,
-          error => alert("Ocorreu um error no servidor, tente mais tarde.")
-        )
+      .subscribe(
+        requests => this.requests = requests,
+        error => alert("Ocorreu um error no servidor, tente mais tarde.")
+      )
+  }
 
+  public ngAfterViewInit(){
+    this.loaderService.show();
   }
 
   public iconClassForInOut(fieldName: string){

@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { LoaderService } from "../components/loader/loader.service";
 import { Request } from './shared/request.model';
 import { RequestService } from "./shared/request.service";
 
@@ -15,7 +16,7 @@ export class RequestsComponent implements OnInit{
   public paginaAtual = 1;
   public errors = [];
 
-  public constructor(private requestService: RequestService){
+  public constructor(private requestService: RequestService, private loaderService: LoaderService){
     this.newRequest = new Request(null, '', '', '');
 
     this.requestTypeOptions = [
@@ -31,11 +32,17 @@ export class RequestsComponent implements OnInit{
     this.requestService.getAll()
       .subscribe(
         requests => this.requests = requests.sort((a, b) => b.id - a.id),
-        error => this.errors.push("Ocorreu um error no servidor, tente mais tarde.")
+        error => this.errors.push("Ocorreu um error no servidor, tente mais tarde."),
+        () => this.loaderService.hide()
       )
   }
 
+  public ngAfterViewInit(){
+    this.loaderService.show()
+  }
+
   public createRequest(){
+    this.loaderService.show()
     this.errors = [];
     this.newRequest.request_type = this.newRequest.request_type.trim();
     this.newRequest.description = this.newRequest.description.trim();
@@ -45,6 +52,7 @@ export class RequestsComponent implements OnInit{
       this.errors.push("A requisição deve ter um tipo!");
       if(!this.newRequest.description)
         this.errors.push("A requisição deve ter uma descrição!");
+        this.loaderService.hide()
     } else {
       console.log(this.newRequest);
       this.requestService.create(this.newRequest)
@@ -53,18 +61,23 @@ export class RequestsComponent implements OnInit{
             this.requests.unshift(request);
             this.newRequest = new Request(null, '', '', '');
           },
-          () => this.errors.push("Ocorreu um erro no servidor, tente mais tarde!")
+          () => this.errors.push("Ocorreu um erro no servidor, tente mais tarde!"),
+          () => this.loaderService.hide()
         )
     }
   }
 
   public deleteRequest(request: Request){
+    this.loaderService.show()
     if(confirm(`Deseja realmente excluir a request "${request.description} de ${request.request_type}"`)){
       this.requestService.delete(request.id)
         .subscribe(
           () => this.requests = this.requests.filter(t => t !== request),
           () => "Ocorreu um erro no servidor, tente novamente mais tarde!",
+          () => this.loaderService.hide()
         )
+    } else {
+      this.loaderService.hide()
     }
   }
 

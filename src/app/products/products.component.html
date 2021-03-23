@@ -27,13 +27,13 @@
   </form>
 </div>
 
+<loader></loader>
 
-
-<div class="panel panel-default animate__animated animate__fadeInUp">
+<div class="panel panel-default">
   <div class="panel-heading"><span class="glyphicon glyphicon-apple text-danger"></span> Produtos</div>
   <div style="overflow-y: hidden">
     <table class="table table-hover">
-      <thead>
+      <thead class="animate__animated animate__fadeInUp">
         <tr>
           <th>ID</th>
           <th>Produto</th>
@@ -43,7 +43,7 @@
           <th>Status</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody class="animate__animated animate__fadeInUp">
         <span *ngIf="products?.length == 0" class="msg-table">Não existe produto cadastrado!</span>
         <tr *ngFor="let product of products | paginate: { itemsPerPage: 5, currentPage: paginaAtual}; let i = index" [ngClass]="colorClassForStatus(product.quantity_measure)">
           <td>{{ product.id }}</td>
@@ -65,7 +65,7 @@
       </tbody>
     </table>
   </div>
-  <div class="pagination-table">
-    <pagination-controls (pageChange)="paginaAtual = $event" previousLabel="Anterior" nextLabel="Próximo" responsive="true"></pagination-controls>
-  </div>
+</div>
+<div class="pagination-table">
+  <pagination-controls (pageChange)="paginaAtual = $event" previousLabel="Anterior" nextLabel="Próximo" responsive="true"></pagination-controls>
 </div>

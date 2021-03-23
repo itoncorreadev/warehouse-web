@@ -2,66 +2,66 @@
 
 <div class="row">
   <div class="col-xs-12 col-md-6">
-    <div class="panel panel-default animate__animated animate__fadeInLeft">
-      <div class="panel-heading"><h4><span class="glyphicon glyphicon-check text-success"></span> Tarefas</h4></div>
+    <div class="panel panel-default">
+      <loader></loader>
+      <div class="panel-heading">
+        <h4>
+          <span class="glyphicon glyphicon-check text-success"></span> Tarefas
+        </h4>
+      </div>
       <div style="overflow-y: hidden">
         <table class="table table-hover">
-          <thead>
+          <thead class="animate__animated animate__fadeInUp">
             <tr>
               <th>Tarefas</th>
               <th>Status</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody class="animate__animated animate__fadeInUp">
             <span *ngIf="tasks?.length == 0" class="msg-table">Não existe tarefa cadastrada!</span>
             <tr *ngFor="let task of tasks | paginate: {  id: 'taskPage', itemsPerPage: 3, currentPage: paginaAtualTask}; let t = index" [ngClass]="colorClassForStatus(task.done)" [routerLink]="['/tasks', task.id]">
               <td style="padding-left: 35px;">{{ task.title }}</td>
               <td><span class="label" [ngClass]="labelClassForStatus(task.done)">{{ task.done_description }}</span></td>
-              <!-- <td  class="text-right">
-                <a [routerLink]="['/tasks', task.id]" class="btn btn-primary">
-                  <span class="glyphicon glyphicon-info-sign"></span>
-                </a>
-              </td> -->
             </tr>
           </tbody>
         </table>
       </div>
-      <div class="pagination">
-        <pagination-controls id="taskPage" (pageChange)="paginaAtualTask = $event" previousLabel="Anterior" nextLabel="Próximo" responsive="true"></pagination-controls>
-      </div>
+    </div>
+    <div class="pagination">
+      <pagination-controls id="taskPage" (pageChange)="paginaAtualTask = $event" previousLabel="Anterior" nextLabel="Próximo" responsive="true"></pagination-controls>
     </div>
   </div>
 
   <div class="col-xs-12 col-md-6">
-    <div class="panel panel-default panel-default animate__animated animate__fadeInRight">
-      <div class="panel-heading"><h4><span class="glyphicon glyphicon-apple text-danger disabled"></span> Produtos</h4></div>
+    <div class="panel panel-default panel-default">
+      <loader></loader>
+      <div class="panel-heading">
+        <h4>
+          <span class="glyphicon glyphicon-apple text-danger disabled"></span> Produtos
+        </h4>
+        </div>
       <div style="overflow-y: hidden">
         <table class="table table-hover">
-          <thead>
+          <thead class="animate__animated animate__fadeInUp">
             <tr>
               <th>Produtos</th>
               <th>Estoque</th>
               <th>Status</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody class="animate__animated animate__fadeInUp">
             <p *ngIf="products?.length == 0" class="msg-table">Não existe produto cadastrado!</p>
             <tr *ngFor="let product of products | paginate: { id: 'productPage', itemsPerPage: 3, currentPage: paginaAtualProduct}; let p = index" [ngClass]="colorClassForStatusProduct(product.quantity_measure)" [routerLink]="['/products', product.id]">
               <td style="padding-left: 35px;">{{ product.name }}</td>
               <td>{{ product.quantity_inventory }} {{ product.measure}}</td>
               <td><span class="label" [ngClass]="labelClassForStatusProduct(product.quantity_measure)">{{ product.quantity_description }}</span></td>
-              <!-- <td  class="text-right">
-                <a [routerLink]="['/products', product.id]" class="btn btn-primary">
-                  <span class="glyphicon glyphicon-info-sign"></span>
-                </a>
-              </td> -->
             </tr>
           </tbody>
         </table>
       </div>
-      <div class="pagination">
-        <pagination-controls id="productPage" (pageChange)="paginaAtualProduct = $event" previousLabel="Anterior" nextLabel="Próximo" responsive="true"></pagination-controls>
-      </div>
+    </div>
+    <div class="pagination">
+      <pagination-controls id="productPage" (pageChange)="paginaAtualProduct = $event" previousLabel="Anterior" nextLabel="Próximo" responsive="true"></pagination-controls>
     </div>
   </div>
 </div>
@@ -69,11 +69,16 @@
 
 <div class="row">
   <div class="col-xs-12 col-md-12">
-    <div class="panel panel-default animate__animated animate__fadeInUp">
-      <div class="panel-heading"><h4><span class="glyphicon glyphicon-refresh text-primary disabled"></span> Requisições</h4></div>
+    <div class="panel panel-default">
+      <loader></loader>
+      <div class="panel-heading">
+        <h4>
+          <span class="glyphicon glyphicon-refresh text-primary disabled"></span> Requisições
+        </h4>
+      </div>
       <div style="overflow-y: hidden">
         <table class="table table-hover">
-          <thead>
+          <thead class="animate__animated animate__fadeInUp">
             <tr>
               <th>Requisições</th>
               <th>Tipo</th>
@@ -81,9 +86,9 @@
               <th>Status</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody class="animate__animated animate__fadeInUp">
             <span *ngIf="requests?.length == 0" class="msg-table">Não existe requisição cadastrada!</span>
-            <tr *ngFor="let request of requests | paginate: {  id: 'requestPage', itemsPerPage: 3, currentPage: paginaAtualRequest}; let r = index" [ngClass]="colorClassForStatus(request.status)" [routerLink]="['/requests', request.id]">
+            <tr *ngFor="let request of requests | paginate: {  id: 'requestPage', itemsPerPage: 3, currentPage: paginaAtualRequest}; let r = index" [ngClass]="colorClassForStatus(request.status)" [routerLink]="['/requests', request.id, 'request-products']">
               <td style="padding-left: 35px;">{{ request.description }}</td>
               <td>
                 <span class="glyphicon" [ngClass]="iconClassForInOut(request.request_type)"></span>
@@ -91,18 +96,13 @@
               </td>
               <td>{{ request.name }}</td>
               <td><span class="label" [ngClass]="labelClassForStatus(request.status)">{{ request.status_description }}</span></td>
-              <!-- <td  class="text-right">
-                <a [routerLink]="['/requests', request.id]" class="btn btn-primary">
-                  <span class="glyphicon glyphicon-info-sign"></span>
-                </a>class="animate__animated animate__fadeInUp animate__infinite"
-              </td> -->
             </tr>
           </tbody>
         </table>
       </div>
-      <div class="pagination">
-        <pagination-controls id="requestPage" (pageChange)="paginaAtualRequest = $event" previousLabel="Anterior" nextLabel="Próximo" responsive="true"></pagination-controls>
-      </div>
+    </div>
+    <div class="pagination">
+      <pagination-controls id="requestPage" (pageChange)="paginaAtualRequest = $event" previousLabel="Anterior" nextLabel="Próximo" responsive="true"></pagination-controls>
     </div>
   </div>
 </div>

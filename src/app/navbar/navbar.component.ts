@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from "@angular/router";
+import { LoaderService } from "../components/loader/loader.service";
 import { AuthService } from "../shared/auth.service";
 
 @Component({
@@ -9,12 +10,17 @@ import { AuthService } from "../shared/auth.service";
 
 export class NavbarComponent{
 
-  public constructor(private authService: AuthService,  private router: Router){}
+  public constructor(private authService: AuthService,  private router: Router, private loaderService: LoaderService){}
 
   public signOutUser(){
+    this.loaderService.show()
     this.authService.signOut()
       .subscribe(
-        () => this.router.navigate(['/sign-in'])
+        () => {
+          this.router.navigate(['/sign-in']),
+          this.loaderService.hide()
+        },
+        () => this.loaderService.hide()
       )
   }
 

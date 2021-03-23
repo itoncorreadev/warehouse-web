@@ -5,6 +5,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgxPaginationModule } from "ngx-pagination";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from './app.component';
+import { LoaderModule } from "./components/loader/loader.module";
 import { DashboardComponent } from "./dashboard/dashboard.component";
 import { AuthGuard } from "./guards/auth.guard";
 import { NotAuthenticatedGuard } from "./guards/not-authenticated.guard";
@@ -45,7 +46,8 @@ import { TasksComponent } from './tasks/tasks.component';
     RequestsComponent,
     RequestDetailComponent,
     RequestProductsComponent,
-    RequestProductDetailComponent
+    RequestProductDetailComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -53,7 +55,16 @@ import { TasksComponent } from './tasks/tasks.component';
     ReactiveFormsModule,
     HttpModule,
     AppRoutingModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    LoaderModule,
+    // NgxLoadingModule.forRoot({
+    //   animationType: ngxLoadingAnimationTypes.wanderingCubes,
+    //     backdropBackgroundColour: 'rgba(0,0,0,0)',
+    //     backdropBorderRadius: '4px',
+    //     primaryColour: '#2752b8',
+    //     secondaryColour: '#db1f1f',
+    //     tertiaryColour: '#f0bc2e'
+    // })
     //InMemoryWebApiModule.forRoot(InMemoryTaskDataService)
   ],
   providers: [

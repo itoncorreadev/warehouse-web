@@ -35,20 +35,23 @@
   </form>
 </div>
 
-<div class="panel panel-default animate__animated animate__fadeInUp">
+<loader></loader>
+
+<div class="panel panel-default">
   <div class="panel-heading"><span class="glyphicon glyphicon-refresh text-primary"></span> Requisições</div>
   <div style="overflow-y: hidden">
     <table class="table table-hover">
-      <thead>
+      <thead  class="animate__animated animate__fadeInUp">
         <tr>
           <th>ID</th>
           <th>Descrição</th>
           <th>Tipo</th>
           <th>Status</th>
           <th>Usuário</th>
+          <th>Ação</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody  class="animate__animated animate__fadeInUp">
         <span *ngIf="requests?.length == 0" class="msg-table">Não existe requisição cadastrada!</span>
         <tr *ngFor="let request of requests | paginate: { itemsPerPage: 5, currentPage: paginaAtual}; let i = index" [ngClass]="colorClassForStatus(request.status)">
           <td>{{ request.id }}</td>
@@ -73,7 +76,7 @@
       </tbody>
     </table>
   </div>
-  <div class="pagination-table">
-    <pagination-controls (pageChange)="paginaAtual = $event" previousLabel="Anterior" nextLabel="Próximo" responsive="true"></pagination-controls>
-  </div>
+</div>
+<div class="pagination-table">
+  <pagination-controls (pageChange)="paginaAtual = $event" previousLabel="Anterior" nextLabel="Próximo" responsive="true"></pagination-controls>
 </div>

@@ -13,6 +13,13 @@
   </div>
 
 
+  <!-- <ng-template #customLoadingTemplate>
+
+  </ng-template>
+
+  <ngx-loading [show]="loading" [config]="{ backdropBorderRadius: '3px' }" [template]="customLoadingTemplate"></ngx-loading> -->
+
+
   <form class="form-horizontal" [formGroup]="form" (ngSubmit)="signInUser()">
 
     <div class="form-group  has-feedback" [ngClass]="formUtils.fieldClassForErrorOrSuccess('email')">
@@ -42,6 +49,7 @@
     </div>
 
     <div class="form-group">
+      <loader></loader>
       <div class="col-sm-offset-4 col-sm-8">
         <button [disabled]="form.invalid || submitted" type="submit" class="btn btn-primary">Fazer Login</button>
       </div>

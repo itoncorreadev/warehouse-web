@@ -35,26 +35,23 @@
 }
 
 .pagination {
-  position: fixed;
-  text-align: center;
-  bottom: -20px;
-  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 .pagination-table {
-  position: fixed;
-  text-align: center;
-  bottom: -170px;
-  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
+
 .panel {
-  height: 270px;
+  height: 280px;
 }
 
 .msg-table {
   position: fixed;
   text-align: center;
-  bottom: 25%;
+  /* bottom: 25%; */
   width: 100%;
 }

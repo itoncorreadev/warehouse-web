@@ -27,12 +27,13 @@
   </form>
 </div>
 
+<loader></loader>
 
-<div class="panel panel-default animate__animated animate__fadeInUp">
+<div class="panel panel-default">
   <div class="panel-heading"><span class="glyphicon glyphicon-check text-success"></span> Tarefas</div>
   <div style="overflow-y: hidden">
     <table class="table table-hover">
-      <thead>
+      <thead class="animate__animated animate__fadeInUp">
         <tr>
           <th>ID</th>
           <th>Título</th>
@@ -41,7 +42,7 @@
           <th>Usuário</th>
         </tr>
       </thead>
-      <tbody>
+      <tbody  class="animate__animated animate__fadeInUp">
         <span *ngIf="tasks?.length == 0" class="msg-table">Não existe tarefa cadastrada!</span>
         <tr *ngFor="let task of tasks | paginate: { itemsPerPage: 5, currentPage: paginaAtual}; let i = index" [ngClass]="colorClassForStatusTask(task.done)">
           <td>{{ task.id }}</td>
@@ -62,7 +63,7 @@
       </tbody>
     </table>
   </div>
-  <div class="pagination-table">
-    <pagination-controls (pageChange)="paginaAtual = $event" previousLabel="Anterior" nextLabel="Próximo" responsive="true"></pagination-controls>
-  </div>
+</div>
+<div class="pagination-table">
+  <pagination-controls (pageChange)="paginaAtual = $event" previousLabel="Anterior" nextLabel="Próximo" responsive="true"></pagination-controls>
 </div>

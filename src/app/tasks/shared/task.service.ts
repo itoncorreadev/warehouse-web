@@ -5,12 +5,14 @@ import { catchError, map } from "rxjs/operators";
 import { TokenService } from "../../shared/token.service";
 import { Task } from "./task.model";
 
+
 @Injectable()
 
 export class TaskService{
   public taskUrl = "tasks";
 
-  public constructor(private tokenHttp: TokenService){}
+  public constructor(
+    private tokenHttp: TokenService){ }
 
   public getAll(): Observable<Task[]>{
     let url = `${this.taskUrl}?q[s]=updated_at+DESC`;
@@ -117,4 +119,5 @@ export class TaskService{
       response.json().data.attributes['user-id']
     )
   }
+
 }

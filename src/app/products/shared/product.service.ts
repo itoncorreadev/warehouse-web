@@ -126,6 +126,7 @@ export class ProductService{
       response.json().data.attributes['quantity-in'],
       response.json().data.attributes['quantity-out'],
       response.json().data.attributes['quantity-inventory'],
+      response.json().data.attributes['quantity-measure'],
       response.json().data.attributes['quantity-description']
     )
   }

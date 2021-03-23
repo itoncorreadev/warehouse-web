@@ -1,6 +1,7 @@
 import { Location } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from '@angular/router';
+import { LoaderService } from "../components/loader/loader.service";
 import { Product } from "../products/shared/product.model";
 import { ProductService } from "../products/shared/product.service";
 import { RequestProduct } from './shared/request-product.model';
@@ -24,31 +25,35 @@ export class RequestProductsComponent implements OnInit{
     private requestProductService: RequestProductService,
     private activatedRoute: ActivatedRoute,
     private productService: ProductService,
-    private location: Location
+    private location: Location,
+    private locaderService: LoaderService
   ){
     this.newRequestProduct = new RequestProduct(null, null, '', null);
   }
 
   public ngOnInit(){
-
     this.requestId = this.activatedRoute.snapshot.params['request_id'];
-
     this.requestProductService.getAll(this.requestId)
       .subscribe(
         requestProducts => this.requestProducts = requestProducts.sort((a, b) => b.id - a.id),
-        error => this.errors.push("Ocorreu um error no servidor, tente mais tarde.")
+        error => this.errors.push("Ocorreu um error no servidor, tente mais tarde."),
+        () => this.locaderService.hide()
       )
 
       this.productService.getAll()
       .subscribe(
         products => this.products = products.sort((a, b) => b.id - a.id),
-        error => this.errors.push("Ocorreu um error no servidor, tente mais tarde.")
+        error => this.errors.push("Ocorreu um error no servidor, tente mais tarde."),
+        () => this.locaderService.hide()
       )
   }
 
+  public ngAfterViewInit(){
+    this.locaderService.show()
+  }
 
   public createRequestProduct(){
-
+    this.locaderService.show();
     this.errors= [];
 
     if(!this.newRequestProduct.product_id || !this.newRequestProduct.quantity || !this.newRequestProduct.unit_price){
@@ -65,18 +70,23 @@ export class RequestProductsComponent implements OnInit{
             this.requestProducts.unshift(requestProduct);
             this.newRequestProduct = new RequestProduct(null, null, '', null);
           },
-          () => this.errors.push("Ocorreu um erro no servidor, tente mais tarde!")
+          () => this.errors.push("Ocorreu um erro no servidor, tente mais tarde!"),
+          () => this.locaderService.hide()
         )
     }
   }
 
   public deleteRequestProduct(requestProduct: RequestProduct){
+    this.locaderService.show();
     if(confirm(`Deseja realmente excluir a detail "${requestProduct.observation} de ${requestProduct.observation}"`)){
       this.requestProductService.delete(requestProduct.id)
         .subscribe(
           () => this.requestProducts = this.requestProducts.filter(t => t !== requestProduct),
           () => "Ocorreu um erro no servidor, tente novamente mais tarde!",
+          () => this.locaderService.hide()
         )
+    } else {
+      this.locaderService.hide();
     }
   }
 

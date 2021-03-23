@@ -1,4 +1,5 @@
 import { Component, OnInit } from "@angular/core";
+import { LoaderService } from "../components/loader/loader.service";
 import { Product } from './shared/product.model';
 import { ProductService } from "./shared/product.service";
 
@@ -14,7 +15,7 @@ export class ProductsComponent implements OnInit{
   public paginaAtual = 1;
   public errorText = '';
 
-  public constructor(private productService: ProductService){
+  public constructor(private productService: ProductService, private loaderService: LoaderService){
     this.newProduct = new Product(null, '');
   }
 
@@ -22,11 +23,17 @@ export class ProductsComponent implements OnInit{
     this.productService.getAll()
       .subscribe(
         products => this.products = products.sort((a, b) => b.id - a.id),
-        error => this.errorText = "Ocorreu um error no servidor, tente mais tarde."
+        error => this.errorText = "Ocorreu um error no servidor, tente mais tarde.",
+        () => this.loaderService.hide()
       )
   }
 
+  public ngAfterViewInit(){
+    this.loaderService.show();
+  }
+
   public createProduct(){
+    this.loaderService.show()
     this.errorText = '';
     this.newProduct.name = this.newProduct.name.trim();
 
@@ -36,21 +43,26 @@ export class ProductsComponent implements OnInit{
       this.productService.create(this.newProduct)
         .subscribe(
           product => {
-            this.products.unshift(product);
-            this.newProduct = new Product(null, '');
+            this.products.unshift(product),
+            this.newProduct = new Product(null, '')
           },
-          () => this.errorText = "Ocorreu um erro no servidor, tente mais tarde!"
+          () => this.errorText = "Ocorreu um erro no servidor, tente mais tarde!",
+          () => this.loaderService.hide()
         )
     }
   }
 
   public deleteProduct(product: Product){
+    this.loaderService.show()
     if(confirm(`Deseja realmente excluir o produto "${product.name}"`)){
       this.productService.delete(product.id)
         .subscribe(
           () => this.products = this.products.filter(t => t !== product),
           () => "Ocorreu um erro no servidor, tente novamente mais tarde!",
+          () => this.loaderService.hide()
         )
+    } else {
+      this.loaderService.hide()
     }
   }
 

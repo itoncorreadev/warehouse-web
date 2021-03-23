@@ -3,6 +3,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute, ParamMap } from "@angular/router";
 import { switchMap } from "rxjs/operators";
+import { LoaderService } from "../../components/loader/loader.service";
 import { FormUtils } from "../../shared/form.utils";
 import { Request } from '../shared/request.model';
 import { RequestService } from "../shared/request.service";
@@ -25,7 +26,8 @@ export class RequestDetailComponent implements OnInit{
     private requestService: RequestService,
     private route: ActivatedRoute,
     private location: Location,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private loaderService: LoaderService
   ){
     this.requestTypeOptions = [
       { value: 'in', text: "Entrada de Produtos"},
@@ -57,14 +59,21 @@ export class RequestDetailComponent implements OnInit{
 
   ngOnInit(){
     this.request = new Request(null, '', '', '');
-
     this.route.paramMap.pipe(
       switchMap((params: ParamMap) => this.requestService.getById(+params.get('id')))
     )
     .subscribe(
-      request => this.setRequest(request),
-      error => alert("Ocorreu um error no servidor, tente mais tarde.")
+      request => {
+        this.setRequest(request),
+        this.loaderService.hide()
+      },
+      error => alert("Ocorreu um error no servidor, tente mais tarde."),
+      () => this.loaderService.hide()
     )
+  }
+
+  public ngAfterViewInit(){
+    this.loaderService.show()
   }
 
   public setRequest(request: Request): void {
@@ -72,13 +81,12 @@ export class RequestDetailComponent implements OnInit{
     this.form.patchValue(request);
   }
 
-
   public goBack(){
     this.location.back();
   }
 
-
   public updateRequest(){
+    this.loaderService.show()
     this.request.document_type = this.form.get('document_type').value;
     this.request.document_code = this.form.get('document_code').value;
     this.request.date = this.form.get('date').value;
@@ -88,7 +96,10 @@ export class RequestDetailComponent implements OnInit{
 
     this.requestService.update(this.request)
     .subscribe(
-      () => alert("Requisição atualizada com sucesso!"),
+      () => {
+        alert("Requisição atualizada com sucesso!")
+        this.loaderService.hide()
+      },
       () => alert("Ocorreu um erro no servidor, tente mais tarde!"),
       () => this.goBack()
     )
