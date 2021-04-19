@@ -5,6 +5,9 @@
 # 🏛️ Warehouse (Frontend)
 Projeto agenda com backend Ruby on Rails API e frontend em Angular e Monile em NativeScript
 
+## 🌐 Heroku
+https://dashboard.heroku.com/apps/warehouse-angular-web
+
 ## 🚀 Começando
 Essas instruções permitirão que você obtenha uma cópia do projeto em operação na sua máquina local para fins de desenvolvimento e teste.
 
@@ -21,6 +24,19 @@ Siga os passos nos links abaixo para instalação do Docker de acordo com seu si
 
 * [Como instalar o Docker](https://docs.docker.com/engine/installation/)
 * [Como instalar o Docker Compose](https://docs.docker.com/compose/)
+
+## ⬇️ Clonar o projeto
+Para obter uma cópia do projeto em operação na sua máquina local para fins de desenvolvimento e teste execute o comando abaixo:
+
+```
+git clone https://github.com/cleitoncorreas/warehouse-web.git
+```
+
+logo após o download, entre na pasta do projeto
+
+```
+cd warehouse-web
+```
 
 ## ⚙️ Build do Projeto
 Para fazer o Build de todos os nossos containers basta rodar (dentro do projeto):
@@ -47,24 +63,38 @@ Para rodar em background utilize o _-d_ após i _up_:
 docker-compose up -d
 ```
 
+## 🌐 Home
+
+```
+http://localhost:4200
+```
+
 ## ⚙️ Executando os testes
 
 No diretório do projeto rode o comando:
 
 ```
-rspec
+docker-compose run application ng test
 ```
 
 ## 🛠️ Construído com
 
-* [Gem Rails](https://github.com/rails/rails/)
-* [Gem Devise Token Auth](https://github.com/heartcombo/devise)
-* [Gem Versionist](https://github.com/bploetz/versionist)
-* [Gem Kaminari](https://github.com/kaminari/kaminari)
-* [Gem Faker](https://github.com/faker-ruby/faker)
-* [Gem Rspec Rails](https://github.com/rspec/rspec-rails)
-* [Gem Shouda Matchers](https://github.com/thoughtbot/shoulda-matchers)
-* [Gem Factory Bot](https://github.com/thoughtbot/factory_bot)
+* @angular/cli: 6.2.9
+* @angular/core: 6.1.10
+* node: 14.15.4
+* npm: 6.14.10
+* express: 4.17.1
+* jquery: 3.2.1
+* moment: 2.18.1
+* ngx-bootstrap: "^4.3.0
+* ngx-loading: 3.0.1
+* ngx-pagination: 5.0.0
+* rxjs: 6.6.3
+* angular2-token: 0.2.0
+* animate.css: 4.1.1
+* bootstrap: 3.3.7
+* express": 4.17.1
+* eonasdan-bootstrap-datetimepicker: 4.17.47
 
 ## ✒️ Autores
 
@@ -82,34 +112,3 @@ Este projeto está sob a licença OpenSource - veja o arquivo [LICENSE.md](https
 
 ---
 ⌨️ com ❤️ por [Cleiton Corrêa](https://github.com/cleitoncorreas) 😊
-
-
-
-
-
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.3.
-
-## Development server
-
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-Before running the tests make sure you are serving the app via `ng serve`.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
