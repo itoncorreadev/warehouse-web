@@ -45,12 +45,6 @@ Para fazer o Build de todos os nossos containers basta rodar (dentro do projeto)
 docker-compose build
 ```
 
-Agora precisamos criar nosso banco de dados e rodar as migrações e seeds, utilizando o docker-compose para fazer isso de maneira fácil. No console rode:
-
-```
-docker-compose run application rake db:create db:migrate db:seed
-```
-
 Para subir nossos containers, rode no console:
 
 ```
